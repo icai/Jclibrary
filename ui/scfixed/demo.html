@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery scrollFixed  || itour.util.scrollFixed demo 说明</title>
+
+
+
+<!-- syntaxhighlighter -->
+<link href="../../asset/styles/shCore.css" rel="stylesheet" />
+<link href="../../asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="css/index.css">
+<script src="../../asset/jquery.js"></script>
+<script type="text/javascript" src="../../asset/jquery.easing.1.3.js"></script>
+<!-- syntaxhighlighter -->
+<script src="../../asset/scripts/shCore.js"></script>
+<script src="../../asset/scripts/shBrushJScript.js"></script>
+<script src="../../asset/scripts/shBrushXml.js"></script>
+<script src="../../asset/scripts/shBrushCss.js"></script>
+
+
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.ClipboardSwf = '../../asset/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+
+</script>
+<script src="jquery.scfixed.js"></script>
+<style>
+.red{
+  color: red;
+}
+</style>
+
+
+</head>
+
+<body>
+<div id="title">
+<h1>jQuery scrollFixed  || itour.util.scrollFixed demo 说明</h1>
+</div>
+
+
+
+<div id="container">
+  <div id="header">
+    <h1>scrollFixed: 顾名思义，页面滚动时固定某个元素</h1>
+  </div>
+  <div id="wrapper">
+    <div id="content">
+      <h3>示例代码</h3>
+      <pre class="brush:js">
+
+        $('#demo1').scrollFixed({top:20});
+        $('#demo2').scrollFixed({top:60});
+        
+      </pre>
+
+      <h3>默认参数：</h3>
+      <pre class="brush:js">
+
+        $.fn.scrollFixed.defaults = {
+          top:0,
+          zIndex:300,
+          limit:null
+        };
+      </pre>
+
+      <h3>*IE6 防止闪屏：</h3>
+      <pre  class="brush:css;">
+        *html{
+            background-image:url(about:blank);
+            background-attachment:fixed;
+        }
+      </pre>
+      <h3>注意事项及说明：</h3>
+      <div class="description">
+        <p>limit 属性 ：限制滚动不能溢出的页面高度，一般是父节点，或者父节点的同级元素的最高高度的元素 (<em class="red">String</em> {jquery selector} )。</p>
+
+        <p>top 属性 ：元素停靠屏幕时，距离屏幕顶部的高度。</p>
+
+      </div>
+
+    <h3>itour 命名空间支持：</h3>
+
+    <pre class="brush: js;">
+
+    function __import(o,param){
+      $(o).scrollFixed(param)
+    }
+
+    exports.itour = exports.itour ? exports.itour : {};
+    exports.itour.util = exports.itour.util ? exports.itour.util : {};
+    exports.itour.util.scrollFixed = __import;
+
+    </pre>   
+
+      <p> <strong>1) Content here.</strong>
+        column long long column very long fill fill fill long text text column text silly very make long very fill silly make make long make text fill very long text column silly silly very column long very column filler fill long make filler long silly very long silly silly silly long filler make column filler make silly long long fill very.
+      </p>
+      <p>
+        very make make fill silly long long filler column long make silly silly column filler fill fill very filler text fill filler column make fill make text very make make very fill fill long make very filler column very long very filler silly very make filler silly make make column column
+      </p>
+      <p>
+        fill long make long text very make long fill column make text very silly column filler silly text fill text filler filler filler make make make make text filler fill column filler make silly make text text fill make very filler column very
+      </p>
+      <p>
+        column text long column make silly long text filler silly very very very long filler fill very fill silly very make make filler text filler text make silly text text long fill fill make text fill long text very silly long long filler filler fill silly long make column make silly long column long make very
+      </p>
+      <p>Lorem ipsum aliqua proident ad Excepteur anim veniam in cupidatat ullamco culpa eiusmod do mollit elit irure eu ad cillum reprehenderit do dolor do ad culpa aliquip enim in proident Ut qui exercitation aute magna id anim in aute laboris nisi nostrud consequat do Ut ea ut commodo id in velit occaecat tempor consequat elit reprehenderit ea labore mollit cillum Excepteur proident ex cillum occaecat ullamco pariatur do occaecat incididunt officia Excepteur qui laborum laborum consectetur ex Excepteur cillum deserunt dolor est est occaecat aliquip culpa proident reprehenderit irure ad culpa adipisicing et dolore eiusmod fugiat veniam in Ut mollit proident in et sunt elit minim consequat nostrud sit ea et id esse consequat dolor sed minim culpa labore sit dolore et incididunt sint nostrud esse sunt nisi et incididunt dolor anim dolor ad ex eu laborum in Excepteur anim adipisicing dolor laborum cupidatat Duis id ex officia ut cillum est Excepteur esse in sed mollit adipisicing ex nostrud ullamco qui eu nulla consequat dolore id ullamco do exercitation fugiat consectetur in consequat Duis Duis est sunt adipisicing tempor eiusmod in consectetur in enim in in eiusmod occaecat veniam est Ut adipisicing qui aute do in amet nostrud sunt est voluptate elit ut dolore anim dolore enim deserunt et exercitation tempor sint elit dolore in do ullamco est adipisicing cillum quis cillum nisi consectetur aliqua anim magna commodo ullamco magna Ut pariatur aliquip amet sit consequat laborum cupidatat. </p>
+      <p>Lorem ipsum aliqua proident ad Excepteur anim veniam in cupidatat ullamco culpa eiusmod do mollit elit irure eu ad cillum reprehenderit do dolor do ad culpa aliquip enim in proident Ut qui exercitation aute magna id anim in aute laboris nisi nostrud consequat do Ut ea ut commodo id in velit occaecat tempor consequat elit reprehenderit ea labore mollit cillum Excepteur proident ex cillum occaecat ullamco pariatur do occaecat incididunt officia Excepteur qui laborum laborum consectetur ex Excepteur cillum deserunt dolor est est occaecat aliquip culpa proident reprehenderit irure ad culpa adipisicing et dolore eiusmod fugiat veniam in Ut mollit proident in et sunt elit minim consequat nostrud sit ea et id esse consequat dolor sed minim culpa labore sit dolore et incididunt sint nostrud esse sunt nisi et incididunt dolor anim dolor ad ex eu laborum in Excepteur anim adipisicing dolor laborum cupidatat Duis id ex officia ut cillum est Excepteur esse in sed mollit adipisicing ex nostrud ullamco qui eu nulla consequat dolore id ullamco do exercitation fugiat consectetur in consequat Duis Duis est sunt adipisicing tempor eiusmod in consectetur in enim in in eiusmod occaecat veniam est Ut adipisicing qui aute do in amet nostrud sunt est voluptate elit ut dolore anim dolore enim deserunt et exercitation tempor sint elit dolore in do ullamco est adipisicing cillum quis cillum nisi consectetur aliqua anim magna commodo ullamco magna Ut pariatur aliquip amet sit consequat laborum cupidatat. </p>
+
+      <p>Lorem ipsum aliqua proident ad Excepteur anim veniam in cupidatat ullamco culpa eiusmod do mollit elit irure eu ad cillum reprehenderit do dolor do ad culpa aliquip enim in proident Ut qui exercitation aute magna id anim in aute laboris nisi nostrud consequat do Ut ea ut commodo id in velit occaecat tempor consequat elit reprehenderit ea labore mollit cillum Excepteur proident ex cillum occaecat ullamco pariatur do occaecat incididunt officia Excepteur qui laborum laborum consectetur ex Excepteur cillum deserunt dolor est est occaecat aliquip culpa proident reprehenderit irure ad culpa adipisicing et dolore eiusmod fugiat veniam in Ut mollit proident in et sunt elit minim consequat nostrud sit ea et id esse consequat dolor sed minim culpa labore sit dolore et incididunt sint nostrud esse sunt nisi et incididunt dolor anim dolor ad ex eu laborum in Excepteur anim adipisicing dolor laborum cupidatat Duis id ex officia ut cillum est Excepteur esse in sed mollit adipisicing ex nostrud ullamco qui eu nulla consequat dolore id ullamco do exercitation fugiat consectetur in consequat Duis Duis est sunt adipisicing tempor eiusmod in consectetur in enim in in eiusmod occaecat veniam est Ut adipisicing qui aute do in amet nostrud sunt est voluptate elit ut dolore anim dolore enim deserunt et exercitation tempor sint elit dolore in do ullamco est adipisicing cillum quis cillum nisi consectetur aliqua anim magna commodo ullamco magna Ut pariatur aliquip amet sit consequat laborum cupidatat. </p>      
+      <P>Lorem ipsum ut amet do sed consequat occaecat do amet cillum minim aliquip in proident cupidatat ut sint consequat reprehenderit ea enim dolore officia eiusmod dolore elit mollit sunt laborum mollit tempor qui officia aliqua nulla reprehenderit id aliqua pariatur eiusmod sint Ut ullamco laborum Duis dolor sed aliqua in in sit enim ex exercitation exercitation quis dolore mollit exercitation quis reprehenderit voluptate tempor Excepteur cillum eiusmod labore non dolor amet do ex nostrud et sint exercitation laboris in sint nulla sed irure Duis aliquip irure laboris consequat fugiat nisi consectetur labore Excepteur amet nisi eu aute in culpa laboris irure sit pariatur exercitation elit adipisicing minim aute cillum voluptate adipisicing proident dolor cillum dolore cupidatat sed id qui est pariatur dolor Duis eu labore nulla enim ut mollit commodo enim quis. </P>
+      <P>Lorem ipsum minim aliqua proident sint do ea in ut consequat magna eiusmod in Ut reprehenderit deserunt adipisicing esse sint eiusmod deserunt laborum dolor Excepteur id dolor Duis nulla commodo in consequat ut pariatur sint tempor officia exercitation quis ad adipisicing aliqua id ullamco ullamco consectetur aliquip dolore in et laboris aliquip minim sunt sint laboris dolor pariatur qui laborum consequat non do dolore non dolore ea deserunt anim aute qui ex reprehenderit mollit nisi amet in adipisicing cupidatat dolore Ut minim culpa sint pariatur in sed proident labore dolor irure reprehenderit sit nostrud fugiat mollit aliqua sed dolore mollit consectetur in aute aliquip cupidatat labore sed dolor occaecat commodo id non commodo quis anim officia non minim ut occaecat elit Duis ullamco deserunt incididunt dolore sunt tempor quis ea commodo qui ea Ut exercitation ea exercitation elit sed nulla enim velit qui reprehenderit ut aute aliqua non quis culpa tempor dolor ad incididunt deserunt minim est do dolor do tempor culpa incididunt mollit irure aliquip voluptate veniam ea do labore id consectetur voluptate voluptate laboris anim incididunt eu non minim occaecat sit culpa esse sunt culpa aliqua incididunt tempor veniam incididunt sit exercitation dolor aliqua enim qui non magna proident veniam enim sint aliquip qui ullamco aliqua irure deserunt eiusmod consectetur enim sunt proident et qui consequat labore quis irure Excepteur occaecat non do esse culpa sint mollit tempor sed Excepteur ad dolor nostrud dolor aliquip incididunt eu minim cupidatat dolore sed exercitation magna ad enim exercitation nostrud laboris esse enim id occaecat enim exercitation ad laborum voluptate dolore fugiat voluptate nulla. </P>
+    </div>
+  </div>
+  <div id="column_nav">
+
+    <div class="calendar " id="demo1" >
+      <p>Lorem ipsum reprehenderit pariatur Duis dolore Duis ut anim ex consectetur nostrud et sed aliquip dolor irure pariatur sit velit sed anim magna labore in ad sunt voluptate irure eiusmod occaecat irure culpa veniam Duis. </p>
+
+    </div>
+
+
+
+    <p> <strong>2) Navigation here.</strong>
+      long long fill filler very fill column column silly filler very filler fill fill filler text fill very silly fill text filler silly silly filler fill very make fill column text column very very column fill fill very silly column silly silly fill fill long filler
+    </p>
+
+    <div class="calendar">
+      <p>Lorem ipsum reprehenderit pariatur Duis dolore Duis ut anim ex consectetur nostrud et sed aliquip dolor irure pariatur sit velit sed anim magna labore in ad sunt voluptate irure eiusmod occaecat irure culpa veniam Duis. </p>
+
+    </div>
+
+  </div>
+  <div id="extra">
+
+    <div class="calendar" id="demo2">
+      
+
+    </div>
+    <p>
+      <strong>3) More stuff here.</strong>
+      very text make long silly make text very very text make long filler very make column make silly column fill silly column long make silly filler column filler silly long long column fill silly column very
+    </p>
+  </div>
+  <div id="footer">
+    <p>
+      Here it goes the footer,more at
+      <a href="javascript:;" target="_parent"></a>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+<script>
+
+
+$(function(){
+
+  $('#demo1').scrollFixed({top:20,limit:'#column_nav'});
+  $('#demo2').scrollFixed({top:60});
+
+});	
+</script>
+</body>
+</html>

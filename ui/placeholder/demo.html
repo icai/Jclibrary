@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery placeholder  || itour.util.placeholder demo 说明</title>
+
+
+<link rel="stylesheet" href="css/index.css">
+<script src="../../asset/jquery.js"></script>
+<script type="text/javascript" src="../../asset/jquery.easing.1.3.js"></script>
+<!-- syntaxhighlighter -->
+<link href="../../asset/styles/shCore.css" rel="stylesheet" />
+<link href="../../asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+
+
+<script src="../../asset/scripts/shCore.js"></script>
+<script src="../../asset/scripts/shBrushJScript.js"></script>
+<script src="../../asset/scripts/shBrushXml.js"></script>
+<script src="../../asset/scripts/shBrushCss.js"></script>
+<!-- syntaxhighlighter -->
+
+<link rel="stylesheet" href="css/placeholder.css">
+
+<link rel="stylesheet" href="../../style/css/ui_demo.css">
+
+
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.ClipboardSwf = '../../asset/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+
+</script>
+<script src="jquery.placeholder.js"></script>
+<style>
+.red{
+  color: red;
+}
+</style>
+
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+<div id="title">
+<h1>jQuery placeholder  || itour.util.placeholder demo 说明</h1>
+</div>
+
+
+
+<h2>demo：</h2>
+<div class="demo_comtent">
+
+
+
+  <h3>模拟</h3>
+  <div class="input_box">
+  <label class="for_placeholder" for="hotalCityName">中文/拼音</label>
+  <input type="text" class="search_input ticket_search_input" data-required="true" name="" id="hotalCityName" placeholder="" value="" autocomplete="off" x-webkit-speech="x-webkit-speech">
+ </div>
+
+ <h3>原生</h3>
+
+  <input type="text" class="search_input ticket_search_input" data-required="true" name="" id="hotalCityName" placeholder="中文/拼音" value="" autocomplete="off" x-webkit-speech="x-webkit-speech">
+
+
+ <pre class="brush:js">
+$('.for_placeholder').placeholder();
+ </pre>
+
+
+<h2>样式约定：</h2>
+<h3>html</h3>
+ <pre class="brush:html">
+  <div class="input_box">
+    <label class="for_placeholder" for="hotalCityName">中文/拼音</label>
+    <input type="text" class="search_input ticket_search_input" data-required="true" name="" id="hotalCityName" placeholder="" value="" autocomplete="off" x-webkit-speech="x-webkit-speech">
+ </div>
+ </pre>
+<h3>js</h3>
+ <pre class="brush:js">
+    //自低向高兼容,不同于一般的placeholder插件，$('') 传入的placeholder模拟的label 元素，
+
+    if('placeholder' in document.createElement('input')){ //如果浏览器原生支持placeholder
+        forobj.attr('placeholder',that.text());
+        that.hide();
+      return;
+    };
+</pre>
+<h3>css</h3>
+ <pre class="brush:css">
+   
+.input_box {
+    position: relative;
+    display: inline-block;
+}
+
+.for_placeholder { 
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    font-size: 13px;
+    color: #c7c7c7;
+}
+
+.for_placeholder{ /*禁止选中*/
+    cursor: text;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+.search_input {
+    line-height: 18px;
+    padding: 3px;
+    height: 18px;
+    border: 1px solid #dcdcdc;
+    border-top-color: #afafaf;
+    border-left-color: #afafaf;
+    width: 206px;
+    outline: none;
+}
+
+ </pre>
+</div>
+
+</div>
+
+
+
+
+<script>
+
+
+$(function(){
+
+  $('.for_placeholder').placeholder();
+});	
+</script>
+</body>
+</html>

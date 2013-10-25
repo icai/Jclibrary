@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery validator || itour.util.validator demo 说明</title>
+
+
+
+<!-- syntaxhighlighter -->
+<link href="asset/styles/shCore.css" rel="stylesheet" />
+<link href="asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+
+
+
+<script src="asset/scripts/shCore.js"></script>
+<script src="asset/scripts/shBrushJScript.js"></script>
+<script src="asset/scripts/shBrushXml.js"></script>
+<!-- <script src="asset/scripts/shBrushCss.js"></script> -->
+
+<script type="text/javascript">
+  // syntaxhighlighter
+  SyntaxHighlighter.config.clipboardSwf = 'asset/scripts/clipboard.swf';
+  SyntaxHighlighter.all();
+
+</script>
+<!-- syntaxhighlighter -->
+
+<link rel="stylesheet" href="css/index.css">
+<script src="asset/jquery.js"></script>
+
+
+<script src="jquery.validator.js?1234567"></script>
+
+
+
+<link rel="stylesheet" href="css/validator.css">
+
+<style type="text/css">
+  
+.validator_target_demo1{
+
+  margin-right:20px;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+<div id="title">
+<h1>jQuery validator || itour.util.validator demo 说明</h1>
+</div>
+
+
+<div id="wrapper">
+
+  <!-- h2{#title#}+pre.brush:js{#} -->
+
+  <!-- h2{demo：}+div.demo_comtent+pre.brush:js -->
+<h2>demo：</h2>
+
+<div class="demo_comtent">
+
+
+  <form action="">
+ <!-- email -->   
+    <div class="email">
+      <input type="text" data-type="email" placeholder="email" >
+      <span data-focus="email">email</span>
+      <span data-blur="email">email</span>
+      <span data-success="email">email</span>
+    </div>
+
+<!-- password -->    
+    <div class="password">
+      <input type="password"  data-type="password" placeholder="password">
+      <span data-focus="password">password</span>
+      <span data-blur="password">password</span>
+      <span data-success="password">password</span>
+    </div>
+
+<!-- password2 -->    
+
+    <div class="password2">
+      <input type="password"  data-type="password2" placeholder="password2">
+      <span data-focus="password2">password</span>
+      <span data-blur="password2">password</span>
+      <span data-success="password2" >password</span>
+    </div>
+
+
+<!-- selector -->    
+    <div id="custom_validator">
+      <input type="password"  data-type="custom_validator" class="custom_validator"  placeholder="custom_validator" >
+      <span data-focus=".custom_validator">password</span>
+      <span data-blur=".custom_validator">password</span>
+      <span data-success=".custom_validator">password</span>
+    </div>
+
+
+
+  </form>
+
+
+
+  
+</div>
+<pre class="brush:js">
+  
+</pre>
+
+
+  <h2>itour 命名空间支持：</h2>
+
+  <pre class="brush: js;">
+  var comPrefix = 'itour';
+
+  exports[comPrefix] = exports[comPrefix] ? exports[comPrefix] : {};
+  exports[comPrefix].util = exports[comPrefix].util ? exports[comPrefix].util : {};
+  exports[comPrefix].util.validator = $.validator
+
+  </pre>
+
+
+</div>
+
+
+<script>
+
+$(function(){
+
+  var bb = {
+    tt:function(){
+      console.log(this);
+    }
+  }
+  bb.tt();
+});
+
+
+</script>
+</body>
+</html>

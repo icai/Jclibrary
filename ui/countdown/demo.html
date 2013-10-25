@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>jQuery countDown 说明</title>
+
+
+
+<!-- syntaxhighlighter -->
+<link href="../../asset/styles/shCore.css" rel="stylesheet" />
+<link href="../../asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+<script src="../../asset/jquery.js"></script>
+<!-- syntaxhighlighter -->
+<script src="../../asset/scripts/shCore.js"></script>
+<script src="../../asset/scripts/shBrushJScript.js"></script>
+
+<script type="text/javascript">
+  // syntaxhighlighter
+  SyntaxHighlighter.config.clipboardSwf = '../../asset/scripts/clipboard.swf';
+  SyntaxHighlighter.all();
+
+</script>
+
+<script src="jquery.countDown.js"></script>
+<link rel="stylesheet" href="../../style/css/ui_demo.css">
+</head>
+
+
+<body>
+<div id="wrapper">
+
+<div id="title">
+<h1>jQuery countDown 说明</h1>
+</div>
+
+<h2>demo：</h2>  
+
+<div class="demo_box">
+  <div id="timer_1"></div>
+  <div id="timer_2"></div>
+</div>
+<h2><a class="totop" href="#wrapper">回到顶部↑</a><span id=".c">参数说明:</span></h2>
+<table class="classtable" cellspacing="0">
+    <thead>
+      <tr>
+        <th width="14%">变量/函数</th>
+        <th width="13%">默认值</th>
+        <th width="14%">类型</th>
+        <th width="59%">描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="code">startTime</td>
+        <td class="code">new Date()</td>
+        <td class="code">String,Date</td>        
+        <td><p>当设置开始值的时候，结果就是时间差，请同时设置refresh为0，字符串必须符合w3c时间标准 new Date（‘str’）</p></td>
+      </tr>    
+      <tr>
+        <td height="29" class="code">endTime</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String,Date</td>        
+        <td><p>结束时间，字符串必须符合w3c时间标准 new Date（‘str’）</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">refresh</td>
+        <td class="code">1000</td>
+        <td class="code">Number</td>        
+        <td>当值设置为0的时候，函数内部调用setTimeout</td>                    
+      </tr>
+      <tr>
+        <td class="code">template</td>
+        <td class="code">{h}:{m}:{s}.{x}</td>
+        <td class="code">String</td>
+        <td><p>{<br>
+'Y'： '年', <br>
+'M' : '月',<br>
+'d' : '日',<br>
+'h' : '时',<br>
+'m' : '分',<br>
+'s' : '秒',<br>
+'X' : '毫秒',<br>
+'x' : '毫秒' // 除以100<br>
+}</p></td>
+      </tr>
+      <tr>
+        <td class="code">hasMonth</td>
+        <td class="code">false</td>
+        <td class="code">Boolean</td>        
+        <td><p>设置出现最大时间单位为天，否则设为true</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">onRender</td>
+        <td class="code">undefiend</td>
+        <td class="code">Function</td>
+        <td> <p>渲染时调用：</p>
+          <p>if(this.setting.onRender &amp;&amp; this.setting.onRender.call(this,data) == false){<br>
+            return false;<br>
+        }</p></td>
+      </tr>
+      <tr>
+        <td class="code">onEnd</td>
+        <td class="code">undefiend</td>
+        <td class="code">Function</td>        
+        <td> <p>结束时调用：</p>
+          <p>if(this.endFlag &amp;&amp; this.setting.onEnd &amp;&amp; this.setting.onEnd.call(this,data) == false){<br>
+            return false;<br>
+        }</p></td>                    
+      </tr>        
+             
+
+    </tbody>
+</table>
+<h2>demo 代码：</h2>
+<pre class="brush: js;">
+  $('#timer_1').countDown({
+    endTime:"2013/9/2",
+    refresh:100,
+    template:'{d}d\' {h}:{m}:{s}.{x}',
+    onEnd:function(){
+      this.container.html('过期了');
+      return false;
+    }
+  })
+
+</pre>
+</div>
+<script>
+$(function(){
+  $('#timer_1').countDown({
+    endTime:"2013/9/2",
+    refresh:100,
+    template:'{d}d\' {h}:{m}:{s}.{x}',
+    onEnd:function(){
+      this.container.html('过期了');
+      return false;
+    }
+  })
+
+
+  
+}); 
+</script>
+</body>
+</html>

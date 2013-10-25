@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>calendar demo page</title>
+	<link rel="stylesheet" href="../../style/css/ui_demo.css">
+
+	<link rel="stylesheet" href="skin/default/demo.css">
+	<link rel="stylesheet" href="skin/ctrip/ctrip.css">
+	<link rel="stylesheet" href="skin/17u/mCal.css">
+  <link rel="stylesheet" href="skin/lunar/lunar.css">
+
+<style type="text/css"></style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="title">
+  <h1>jQuery calendar </h1>
+  </div>
+
+<h2><span id=".b">参数设置:</span><a class="totop" href="#wrapper">回到顶部↑</a></h2>
+<table class="classtable" cellspacing="0">
+    <thead>
+      <tr>
+        <th width="14%">参数</th>
+        <th width="13%">默认值</th>
+        <th width="14%">类型</th>
+        <th width="59%">描述</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td class="code">container</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>日历生成容器，HTML DOM 选择器</p></td>                    
+      </tr>    
+      <tr>
+        <td class="code">triggerNode</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>开始触发HTML DOM 选择器</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">endTriggerNode</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>二次触发HTML DOM 选择器</p>
+        </td>                    
+      </tr>
+      <tr>
+        <td class="code">count</td>
+        <td class="code">2</td>
+        <td class="code">Number</td>        
+        <td>显示月份数 </td>                    
+      </tr>
+      <tr>
+        <td class="code">stepMonth</td>
+        <td class="code">1</td>
+        <td class="code">Number</td>        
+        <td>上一月，下一月切换步进</td>                    
+      </tr>
+      <tr>
+        <td class="code">afterDays</td>
+        <td class="code">-1</td>
+        <td class="code">Number</td>        
+        <td><p>酒店日历，-1为没有限制，其他依次类推</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">weekPrefix</td>
+        <td class="code">'星期'</td>
+        <td class="code">String</td>        
+        <td>日历星期 前序，一般为周 或 星期</td>                    
+      </tr>
+      <tr>
+        <td class="code">isHoliday</td>
+        <td class="code">true</td>
+        <td class="code">String</td>        
+        <td>设定节假日</td>                    
+      </tr>
+      <tr>
+        <td class="code">firstDayOfWeek</td>
+        <td class="code">0</td>
+        <td class="code">String</td>        
+        <td>0表示星期天，以此类推</td>                    
+      </tr> 
+      <tr>
+        <td class="code"> classNames:{}</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">Object</td>        
+        <td>------------------日期相关className-----------------</td>                    
+      </tr>       
+      <tr>
+        <td height="54" class="code">classNames.oldDate</td>
+        <td class="code">'oldDate'</td>
+        <td class="code">String,[Bloolean]</td>        
+        <td>过期日期className，同时具有Boolean 判断</td>                    
+      </tr> 
+                  
+      <tr>
+        <td class="code">classNames.overDate<br></td>
+        <td class="code">'overDate'</td>
+        <td class="code">String,[Bloolean]</td>        
+        <td>超出范围日期className，同时具有Boolean 判断</td>                    
+      </tr>       
+      <tr>
+        <td height="46" class="code">classNames.weekend<br></td>
+        <td class="code">'weekend'</td>
+        <td class="code">String</td>        
+        <td>周末相关className</td>                    
+      </tr>
+      <tr>
+        <td height="47" class="code">classNames.hoverRangeDay<br></td>
+        <td class="code">'hover'</td>
+        <td class="code">String,[Bloolean]</td>        
+        <td>滑过选定日期className，同时具有Boolean 判断</td>                            
+      </tr>      
+      <tr>
+        <td height="48" class="code">classNames.selectRangeDay</td>
+        <td class="code">'selected'</td>
+        <td class="code">String,[Bloolean]</td>        
+        <td>选定日期className，同时具有Boolean 判断</td>                    
+      </tr>
+      <tr>
+        <td height="49" class="code">textNames:{}</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">Object</td>        
+        <td>------------------日历相关字段文本---------------------</td>                    
+      </tr>            
+      <tr>
+        <td height="50" class="code">textNames.monthNames</td>
+        <td class="code">''</td>
+        <td class="code">Array,String</td>        
+        <td>月份名称，可选值：“” || 数组</td>                    
+      </tr>       
+      <tr>
+        <td height="64" class="code">textNames.dayNames</td>
+        <td class="code">['日', '一', '二', '三', '四', '五', '六']</td>
+        <td class="code">Array</td>        
+        <td>月份名称，可选值：“” || 数组 </td>                    
+      </tr>       
+      <tr>
+        <td height="57" class="code"><span class="new">!</span>outOfRangeLock</td>
+        <td class="code">false</td>
+        <td class="code">Boolean</td>        
+        <td>设定日历在超出范围的时候，月份是否可切换</td>                    
+      </tr>             
+      <tr>
+        <td class="code">&nbsp;</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">&nbsp;</td>        
+        <td>&nbsp;</td>                    
+      </tr>        
+             
+
+    </tbody>
+</table>
+
+<h2><a class="totop" href="#wrapper">回到顶部↑</a><span id=".c">类变量/函数说明:</span></h2>
+<table class="classtable" cellspacing="0">
+    <thead>
+      <tr>
+        <th width="14%">变量/函数</th>
+        <th width="13%">默认值</th>
+        <th width="14%">类型</th>
+        <th width="59%">描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="code">container</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>日历生成容器，HTML DOM 选择器</p></td>                    
+      </tr>    
+      <tr>
+        <td class="code">triggerNode</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>开始触发HTML DOM 选择器</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">endTriggerNode</td>
+        <td class="code">''</td>
+        <td class="code">String</td>        
+        <td><p>二次触发HTML DOM 选择器</p>
+        </td>                    
+      </tr>
+      <tr>
+        <td class="code">count</td>
+        <td class="code">2</td>
+        <td class="code">Number</td>        
+        <td>显示月数 </td>                    
+      </tr>
+      <tr>
+        <td class="code">stepMonth</td>
+        <td class="code">1</td>
+        <td class="code">Number</td>        
+        <td>上一月，下一月切换步进</td>                    
+      </tr>
+      <tr>
+        <td class="code">afterDays</td>
+        <td class="code">-1</td>
+        <td class="code">Number</td>        
+        <td><p>酒店日历，-1为没有限制，其他依次类推</p></td>                    
+      </tr>
+      <tr>
+        <td class="code">weekPrefix</td>
+        <td class="code">'星期'</td>
+        <td class="code">String</td>        
+        <td>日历星期 前序，一般为周 或 星期</td>                    
+      </tr>
+      <tr>
+        <td class="code">isHoliday</td>
+        <td class="code">true</td>
+        <td class="code">String</td>        
+        <td>阴影层颜色</td>                    
+      </tr>
+      <tr>
+        <td class="code">firstDayOfWeek</td>
+        <td class="code">0</td>
+        <td class="code">String</td>        
+        <td>阴影层颜色</td>                    
+      </tr> 
+      <tr>
+        <td class="code"> classNames:{}</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">Object</td>        
+        <td>日期相关className</td>                    
+      </tr>       
+      <tr>
+        <td height="54" class="code">classNames.oldDate</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String</td>        
+        <td>阴影层颜色</td>                    
+      </tr> 
+                  
+      <tr>
+        <td class="code">classNames.overDate<br></td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String</td>        
+        <td>&nbsp;</td>                    
+      </tr>       
+      <tr>
+        <td height="46" class="code">classNames.weekend<br></td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String</td>        
+        <td>&nbsp;</td>                    
+      </tr>
+      <tr>
+        <td height="47" class="code">classNames.hoverRangeDay<br></td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String</td>        
+        <td>&nbsp;</td>                            
+      </tr>      
+      <tr>
+        <td height="48" class="code">classNames.selectRangeDay</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">String</td>        
+        <td>&nbsp;</td>                    
+      </tr>
+      <tr>
+        <td height="49" class="code">textNames:{}</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">Object</td>        
+        <td>日历相关字段文本。</td>                    
+      </tr>            
+      <tr>
+        <td height="50" class="code">textNames.monthNames</td>
+        <td class="code">''</td>
+        <td class="code">Array,String</td>        
+        <td>月份名称，可选值：“” || 数组</td>                    
+      </tr>       
+      <tr>
+        <td height="64" class="code">textNames.dayNames</td>
+        <td class="code">['日', '一', '二', '三', '四', '五', '六']</td>
+        <td class="code">Array</td>        
+        <td>月份名称，可选值：“” || 数组 </td>                    
+      </tr>       
+      <tr>
+        <td height="57" class="code"><span class="new">!</span>outOfRangeLock</td>
+        <td class="code">false</td>
+        <td class="code">Boolean</td>        
+        <td>设定日历在超出范围的时候，月份是否可切换</td>                    
+      </tr>             
+      <tr>
+        <td class="code">&nbsp;</td>
+        <td class="code">&nbsp;</td>
+        <td class="code">&nbsp;</td>        
+        <td>&nbsp;</td>                    
+      </tr>        
+             
+
+    </tbody>
+</table>
+<h2><a class="totop" href="#wrapper">回到顶部↑</a><span id=".d">参考示例:</span></h2>
+  <div class="calendar_demo clearfix">
+		<div id="calendar_demo_1" class="panel_box">
+		</div>
+	</div>
+	<div class="calendar_demo clearfix">
+      <div id="search">
+          <form id="J_Search">
+              <ul>
+                  <li>
+                      <strong>酒店入住/离店日期选择</strong>
+                  </li>
+                  <li>
+                      <label class="tit" for="J_CheckIn">入住时间：</label>
+
+                      <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-29" data-bind="week"></span>
+                        <input id="J_CheckIn" type="text" class="J_S1 f-text trigger-node-29" value="" autocomplete="off">
+                      </div>
+                  </li>
+                  <li>
+                      <label class="tit" for="J_CheckOut">离店时间：</label>
+                      <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-29" data-bind="week" ></span>
+                        <input id="J_CheckOut" type="text" class="J_S2 f-text trigger-node-29" value="" autocomplete="off">
+                      </div>
+                  </li>
+                  <li>
+                      <strong>机票出发/返程日期选择</strong>
+                  </li>
+                  <li>
+                      <label class="tit" for="J_DepDate">出发时间：</label>
+                      <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-55" data-bind="week" ></span>
+                        <input id="J_DepDate" type="text" class="J_S1 f-text trigger-node-55" value="" autocomplete="off">
+                      </div>
+                  </li>
+                  <li>
+                      <label class="tit" for="J_RetDate">返程时间：</label>
+                      <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-55" data-bind="week" ></span>
+                        <input id="J_RetDate" type="text" class="J_S2 f-text trigger-node-55" value="" autocomplete="off">
+                      </div>
+                  </li>
+              </ul>
+          </form>
+      </div>
+      <div>
+          <div class="inline_box"><input type="text" id="calendar_in"></div>
+          <div class="inline_box" ><input type="text" id="calendar_out" ></div>
+      </div>
+	</div>
+  <div class="lunar clearfix">
+    <div id="content" class="ks-clear">
+      <div class="wnl-wrap">
+        <div class="hd ks-clear">
+          <div class="lunar-box sx5" style="text-align: center;" id="J_dateHeader" title="蛇年">
+            <span id="sy">2013</span> 年
+            <span id="sm">6</span>月 
+            <span id="gz">农历癸巳年</span> 
+          </div>
+          
+          <div class="date-nav ks-clear">
+            <div class="field-botton pre-year" title="上一年" id="J_preYear" datetype="YU"><i class="arrow"></i></div>
+            <div class="field-botton next-year" title="下一年" id="J_nextYear" datetype="YD"><i class="arrow"></i></div>
+            <div class="field-botton pre-month" title="上一月" id="J_preMonth" datetype="MU"><i class="arrow"></i></div>
+            <div class="field-botton next-month" title="下一月" id="J_nextMonth" datetype="MD"><i class="arrow"></i></div>
+            <div class="field-botton cur-day" title="今天" id="J_curDay" datetype="CUR">Today</div>
+          </div>
+        </div>
+        <div class="bd">
+          <table class="week">
+            <tbody>
+              <tr>
+                <td class="weekend">星期日</td>
+                <td>星期一</td>
+                <td>星期二</td>
+                <td>星期三</td>
+                <td>星期四</td>
+                <td>星期五</td>
+                <td class="weekend">星期六</td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="date-box ks-clear" id="J_dates">
+            <li>
+              <div class="inner"> <i class="note-icon"></i>
+              </div>
+            </li>
+            <li>
+              <div class="inner"> <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li index="2013-6-1" jr="儿童节&amp;国际儿童节 " class="">
+              <div class="inner">
+                <i class="note-icon"></i> <em>1</em>
+                <p> <font color="#909090">儿童节&amp;…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-2" jr="">
+              <div class="inner">
+                <i class="note-icon"></i> <em>2</em>
+                <p>廿四</p>
+              </div>
+            </li>
+            <li index="2013-6-3" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>3</em>
+                <p>廿五</p>
+              </div>
+            </li>
+            <li index="2013-6-4" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>4</em>
+                <p>廿六</p>
+              </div>
+            </li>
+            <li index="2013-6-5" jr="世界环境保护日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>5</em>
+                <p> <font color="#909090">世界环境…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-6" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>6</em>
+                <p>廿八</p>
+              </div>
+            </li>
+            <li index="2013-6-7" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>7</em>
+                <p>廿九</p>
+              </div>
+            </li>
+            <li index="2013-6-8" jr="中国文化遗产日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>8</em>
+                <p>
+                  <font color="#909090">中国文化…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-9" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>9</em>
+                <p>初二</p>
+              </div>
+            </li>
+            <li index="2013-6-10" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>10</em>
+                <p>初三</p>
+              </div>
+            </li>
+            <li index="2013-6-11" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>11</em>
+                <p>初四</p>
+              </div>
+            </li>
+            <li index="2013-6-12" jr="端午节 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>12</em>
+                <p>
+                  <font color="#909090">端午节</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-13" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>13</em>
+                <p>初六</p>
+              </div>
+            </li>
+            <li index="2013-6-14" jr="世界献血者日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>14</em>
+                <p>
+                  <font color="#909090">世界献血…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-15" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>15</em>
+                <p>初八</p>
+              </div>
+            </li>
+            <li index="2013-6-16" jr="父亲节&amp;国际父亲节 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>16</em>
+                <p>
+                  <font color="#909090">父亲节&amp;…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-17" jr="防治荒漠化和干旱日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>17</em>
+                <p>
+                  <font color="#909090">防治荒漠…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-18" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>18</em>
+                <p>十一</p>
+              </div>
+            </li>
+            <li index="2013-6-19" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>19</em>
+                <p>十二</p>
+              </div>
+            </li>
+            <li index="2013-6-20" jr="世界难民日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>20</em>
+                <p>
+                  <font color="#909090">世界难民日</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-21" class="today" jr="夏至">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>21</em>
+                <p>
+                  <font color="#ff7200">夏至</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-22" jr="中国儿童慈善活动日 ">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>22</em>
+                <p>
+                  <font color="#909090">中国儿童…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-23" jr="国际奥林匹克日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>23</em>
+                <p>
+                  <font color="#909090">国际奥林…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-24" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>24</em>
+                <p>十七</p>
+              </div>
+            </li>
+            <li index="2013-6-25" jr="全国土地日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>25</em>
+                <p>
+                  <font color="#909090">全国土地日</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-26" jr="国际禁毒日 国际宪章日 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>26</em>
+                <p>
+                  <font color="#909090">国际禁毒…</font>
+                </p>
+              </div>
+            </li>
+            <li index="2013-6-27" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>27</em>
+                <p>二十</p>
+              </div>
+            </li>
+            <li index="2013-6-28" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>28</em>
+                <p>廿一</p>
+              </div>
+            </li>
+            <li index="2013-6-29" jr="" class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>29</em>
+                <p>廿二</p>
+              </div>
+            </li>
+            <li index="2013-6-30" jr="世界青年联欢节 " class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+                <em>30</em>
+                <p>
+                  <font color="#909090">世界青年…</font>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li>
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li class="">
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li>
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+            <li>
+              <div class="inner">
+                <i class="note-icon"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="notes-wrap" style="display:none;"  >
+        <h3 class="title">我的事件</h3>
+        <div id="note-list" class="ks-hidden">
+          <table>
+            <tbody>
+              <tr>
+                <td class="note-key">日期:</td>
+                <td class="note-value">
+                  <div id="note-date"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">主题:</td>
+                <td class="note-value">
+                  <div id="note-theme"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">内容:</td>
+                <td class="note-value">
+                  <div id="note-content"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">&nbsp;</td>
+                <td class="note-value">
+                  <div class="field-botton" id="J_editNote">修改</div>
+                  <div class="field-botton" id="J_deleteNote">删除</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>
+        <div id="note-none" class="" >
+          暂无事件
+          <div class="field-botton" id="J_createNote">创建事件</div>
+        </div>
+        <div id="note-create" class="ks-hidden" >
+          <table>
+            <tbody>
+              <tr>
+                <td class="note-key">日期:</td>
+                <td class="note-value">
+                  <div id="note-date-input"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">主题:</td>
+                <td class="note-value">
+                  <div class="note-theme">
+                    <input type="text" class="field-input" id="note-theme-input">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">内容:</td>
+                <td class="note-value">
+                  <div class="note-content">
+                    <textarea class="field-textarea" id="note-content-input"></textarea>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="note-key">&nbsp;</td>
+                <td class="note-value">
+                  <div class="field-botton" id="J_saveNote">创建</div>
+                  <div class="field-botton" id="J_cancleNote">取消</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="../../asset/jquery.min.js"></script>
+	<script src="../calendar/jquery.calendar.js"></script>
+  <script src="../calendar/lunar.js"></script>
+  <script src="../calendar/demo-instance.js"></script>
+
+</body>
+</html>

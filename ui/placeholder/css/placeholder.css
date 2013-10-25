@@ -1,0 +1,52 @@
+
+
+.input_box {
+    position: relative;
+    display: inline-block;
+}
+
+.for_placeholder {
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    font-size: 13px;
+    color: #c7c7c7;
+}
+
+.for_placeholder{
+    cursor: text;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+.search_input {
+    line-height: 18px;
+    padding: 3px;
+    height: 18px;
+    border: 1px solid #dcdcdc;
+    border-top-color: #afafaf;
+    border-left-color: #afafaf;
+    width: 206px;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery mask || itour.ui.mask demo 说明</title>
+
+<!-- syntaxhighlighter -->
+<link href="../../asset/styles/shCore.css" rel="stylesheet" />
+<link href="../../asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="css/index.css">
+<script src="../../asset/jquery.min.js"></script>
+<script type="text/javascript" src="../../asset/jquery.easing.1.3.js"></script>
+<!-- syntaxhighlighter -->
+<script src="../../asset/scripts/shCore.js"></script>
+<script src="../../asset/scripts/shBrushJScript.js"></script>
+<script src="../../asset/scripts/shBrushXml.js"></script>
+<!-- <script src="../../asset/scripts/shBrushCss.js"></script> -->
+
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = '../../asset/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+</script>
+<script src="jquery.mask.js"></script>
+
+
+<link rel="stylesheet" href="../../style/css/ui_demo.css">
+<link rel="stylesheet" href="css/mask.css">
+
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="title">
+	<h1>jQuery mask  || itour.ui.mask demo 说明</h1>
+	</div>
+	<h2>demo：</h2>	
+
+
+	<div>	
+	<select name="" id="">
+		<option value="0">iebug</option>
+		<option value="1">ie6</option>
+		<option value="2">ie7</option>
+		<option value="3">ie8</option>
+	</select>
+	</div>
+
+
+	<ul class="warp clearfix">
+		<li>
+			<h3>0.默认状态（打开）</h3>
+			<button class="btn demo0">默认状态开</button>
+		</li>
+		<li>
+			
+			<pre class="brush: js;">
+
+				$.mask();
+			</pre>
+
+		</li>
+
+
+		<li>
+			<h3>1.默认状态（关闭）</h3>
+			<button class="btn demo1">默认状态关</button>
+		</li>
+		<li>
+			
+			<pre class="brush: js;" >
+				$.unmask();
+			</pre>	
+
+
+		</li>
+
+		<li>
+			<h3>2.设置样式参数</h3>
+			<button class="btn demo2">设置样式</button>
+
+		</li>
+		<li>
+			
+			<pre class="brush: js;" >
+				$.mask({
+					background:"#2932E1",
+					zIndex:9999,
+					opacity:0.7
+				});
+
+			</pre>	
+
+		</li>
+		<li>
+			<h3>3.直接删除:</h3>
+			<button class="btn demo3">直接删除</button>
+		</li>
+		<li>
+			<pre class="brush: js;" >
+				$.unmask("fast");
+			</pre>	
+
+		</li>
+
+		<li>
+			<h3>4.删除动画过渡时间:</h3>
+			<button class="btn demo4">删除动画</button>
+
+
+
+		</li>
+		<li>
+			<pre class="brush: js;" >
+				$.unmask(2000);
+			</pre>		
+		</li>
+		<li>
+			<h3>5.删除所有遮罩层:</h3>
+
+			<button class="btn demo5">删除所有</button>
+
+
+
+		</li>
+		<li>
+			<pre class="brush: js;" >
+				$.unmask(true,2000); // 第一个参数设置成 true
+
+			</pre>		
+		</li>
+
+		<li>
+			<h3>6.mask 函数 before,callback :</h3>
+			<button class="btn demo6">mask函数</button>
+
+
+		</li>
+		<li>
+			<pre class="brush: js;" >
+				
+				$.mask({
+					background:"#FEB20F",
+					zIndex:9999,
+					opacity:0.8,
+					before:function(r){
+						alert("将会生成的遮罩层id:" + r);
+					},
+					callback:function(r){
+						alert("已经生成的遮罩层id:" + r);
+					}
+				});
+			</pre>		
+		</li>
+		<li>
+			<h3>7.unmask 函数 (待续) :</h3>
+			<button class="btn demo7"></button>
+
+		</li>
+		<li>
+			<pre class="brush: js;" >
+				
+				$.mask(function(){
+
+				});
+			</pre>		
+
+
+		</li>
+
+
+	</ul>
+
+	<h2>参数及其说明:</h2>
+
+	<pre class="brush: js;">
+
+
+
+	$.extend({
+
+		/**
+		 * mask 生成遮罩层
+		 * @param  {[Object]} optss [description]
+		 * @return {[type]}       [description]
+		 */
+		mask:function(optss){
+
+			// ...
+		},
+		/**
+		 * unmask:: 删除 遮罩层
+		 * 
+		 * @arguments  {[Boolean]} a [description]
+		 * @param  {[Boolean]} b [description]
+		 * 
+		 */
+		unmask:function(a,b){ // (ture,300);
+
+		   // ...
+
+		}
+
+		// default optss
+		$.mask.defaults = {
+			background:"#000",
+			zIndex:9999,
+			opacity:0.5,
+			before: function(a) {},
+			callback: function(a) {}
+		};
+
+	})
+
+
+
+	</pre>
+
+
+
+
+	<h2>itour 命名空间支持：</h2>
+
+	<pre class="brush: js;">
+		
+	    exports.itour = exports.itour ? exports.itour : {};
+	    exports.itour.ui = exports.itour.ui ? exports.itour.ui : {};
+	    exports.itour.ui.mask = $.mask;
+		exports.itour.ui.unmask = $.unmask;
+
+	</pre>
+
+</div>
+
+
+<script>
+
+
+
+
+$(function(){
+
+
+
+
+
+	$('.demo0').click(function(){
+		$.mask();
+	});
+	$('.demo1').click(function(){
+		$.unmask();
+
+	});
+
+	$('.demo2').click(function(){
+
+		$.mask({
+			background:"#2932E1",
+			zIndex:9999,
+			opacity:0.7
+		});
+	});
+	$('.demo3').click(function(){
+		$.unmask("fast");
+	});
+	$('.demo4').click(function(){
+		$.unmask(2000);
+	});
+
+	$('.demo5').click(function(){
+		$.unmask(true,2000);
+		
+		
+	});
+	$('.demo6').click(function(){
+		$.mask({
+			background:"#FEB20F",
+			zIndex:9999,
+			opacity:0.8,
+			before:function(r){
+				alert("将会生成的遮罩层id:" + r);
+			},
+			callback:function(r){
+				alert("已经生成的遮罩层id:" + r);
+			}
+		});
+
+	});
+
+	$('.demo7').click(function(){
+
+	});
+
+
+});	
+</script>
+</body>
+</html>

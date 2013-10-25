@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>jQuery TAB  || itour.ui.tab demo 说明</title>
+
+
+
+<!-- syntaxhighlighter -->
+<link href="asset/styles/shCore.css" rel="stylesheet" />
+<link href="asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+<script src="asset/jquery.js"></script>
+<!-- syntaxhighlighter -->
+<script src="asset/scripts/shCore.js"></script>
+<script src="asset/scripts/shBrushJScript.js"></script>
+
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = 'asset/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+</script>
+
+<script src="jquery.tabs.20130107.js"></script>
+<link rel="stylesheet" href="../../style/css/ui_demo.css">
+</head>
+
+
+<body>
+<div id="wrapper">
+
+<div id="title">
+<h1>jQuery TAB  || itour.ui.tab demo 说明</h1>
+</div>
+
+
+<p class="clearfix" ><a href="demo.html" class="fr" >查看新版 </a></p>
+
+<h2>demo：</h2>	
+<ul class="tabdemo clearfix">
+	<li>
+<h3>默认状态</h3>
+<div class="box demo1">
+	<ul class="tab_menu">
+		<li class="current">新闻</li>
+		<li>图片</li>
+		<li>军事</li>
+	</ul>
+	<div class="tab_box">
+		<div>新闻</div>
+		<div class="hide">图片</div>
+		<div class="hide">军事</div>
+	</div>
+</div>		
+
+	</li>
+	<li>
+<h3>鼠标划过</h3>
+<div class="box demo2">
+	<ul class="tab_menu">
+		<li class="current">新闻</li>
+		<li>图片</li>
+		<li>军事</li>
+	</ul>
+	<div class="tab_box">
+		<div>新闻</div>
+		<div class="hide">图片</div>
+		<div class="hide">军事</div>
+	</div>
+</div>		
+
+
+	</li>
+
+	<li>
+		
+		<h3>ajax 加载</h3>
+		<div class="box demo3">
+			<ul class="tab_menu">
+				<li class="current">新闻</li>
+				<li>图片</li>
+				<li>军事</li>
+			</ul>
+			<div class="tab_box">
+				<div>新闻</div>
+				<div class="hide">图片</div>
+				<div class="hide">军事</div>
+			</div>
+		</div>
+
+	</li>
+	<li>
+
+		<h3>回调函数</h3>
+		<div class="box demo4">
+			<ul class="tab_menu">
+				<li class="current">新闻</li>
+				<li>图片</li>
+				<li>军事</li>
+			</ul>
+			<div class="tab_box">
+				<div>新闻</div>
+				<div class="hide">图片</div>
+				<div class="hide">军事</div>
+			</div>
+		</div>
+
+	</li>	
+
+</ul>
+<h2>description:</h2>
+<table width="923" height="1061"  class="classtable">
+  <tr>
+    <th width="107" scope="col">参数</th>
+    <th width="54" scope="col">类型</th>
+    <th width="115" scope="col">可选</th>
+    <th width="136" scope="col">默认值</th>
+    <th width="477" scope="col">描述</th>
+    </tr>
+  <tr>
+    <td height="64">addClass</td>
+    <td><div align="center">String</div></td>
+    <td>N/A</td>
+    <td><div align="center">‘current’</div></td>
+    <td>tab触发事件时，添加的className ，字符串</td>
+    </tr>
+  <tr>
+    <td height="72">oEvent</td>
+    <td><div align="center">Sting</div></td>
+    <td>N/A</td>
+    <td><div align="center">‘click’|| ‘mouseover’</div></td>
+    <td>触发事件</td>
+    </tr>
+  <tr>
+    <td height="70">tabClass</td>
+    <td><div align="center">Sting</div></td>
+    <td>||tabParentClass</td>
+    <td><div align="center">null</div></td>
+    <td>Tab菜单中的选项的ClassName （jquery Selector）</td>
+    </tr>
+  <tr>
+    <td height="75">tabParentClass</td>
+    <td><div align="center">Sting</div></td>
+    <td>||tabClass</td>
+    <td><div align="center">null</div></td>
+    <td>Tab菜单的ClassName （jquery Selector）</td>
+    </tr>
+  <tr>
+    <td height="90">contentClass</td>
+    <td><div align="center">Sting</div></td>
+    <td>|| contentParentClass</td>
+    <td><div align="center">null</div></td>
+    <td>content盒子的ClassName （jquery Selector）</td>
+    </tr>
+
+  <tr>
+    <td height="98">contentParentClass</td>
+    <td><div align="center">String</div></td>
+    <td>|| contentClass</td>
+    <td><div align="center">null</div></td>
+    <td>content盒子中选项的ClassName （jquery Selector）</td>
+  </tr>
+  <tr>
+    <td height="266">qjax</td>
+    <td>Object</td>
+    <td>N/A</td>
+    <td>null</td>
+    <td><p>{<br>
+      url: '/path/to/file', // 路径<br>
+      type: 'POST',// ajax 请求类型<br>
+      data: {param1: 'value1'},//参数<br>
+      dataType:'xml/html/script/json/jsonp', 类型<br>
+      template:null,//模板 规则： itour.util.template<br>
+      }</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td height="278">callback</td>
+    <td>function</td>
+    <td><p>N/A</p></td>
+    <td>null</td>
+    <td><p>回调函数：</p>
+      <p>第一个参数：当前Tab 选项 索引 （0,1,2,3...）</p></td>
+  </tr> 
+    
+
+</table>
+
+<h2>itour 命名空间支持：</h2>
+
+<pre class="brush: js;">
+	
+	function __tab__(q,param){
+		return $(q).tabs(param);
+	}
+    w.itour = w.itour ? w.itour : {};
+    w.itour.ui = w.itour.ui ? w.itour.ui : {};
+    w.itour.ui.tab = __tab__
+
+</pre>
+
+<h2>demo 代码：</h2>
+<pre class="brush: js;">
+	
+	$('.demo1').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null,
+	});
+
+	$('.demo2').tabs({
+		addClass:'current',
+		oEvent:'mouseover',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null
+	});
+
+	$('.demo3').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null,
+		qjax:{
+			url: '/path/to/file',
+			type: 'POST',
+			data: {param1: 'value1'},
+			dataType:'xml/html/script/json/jsonp',
+			template:null,
+		}
+	});
+
+	$('.demo4').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null,
+		callback:function(index){
+			console && console.log && console.log(arguments);
+
+		}
+	});
+
+
+</pre>
+
+
+
+
+
+</div>
+
+
+<script>
+$(function(){
+
+
+	$('.demo1').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null
+	});
+
+	$('.demo2').tabs({
+		addClass:'current',
+		oEvent:'mouseover',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null
+	});
+
+	$('.demo3').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null,
+		qjax:{
+			url: '/path/to/file',
+			type: 'POST',
+			data: {param1: 'value1'},
+			dataType:'xml/html/script/json/jsonp',
+			template:null
+		}
+	});
+
+	$('.demo4').tabs({
+		addClass:'current',
+		oEvent:'click',
+		tabIndex: 0,
+		tabClass:null,
+		tabParentClass:'.tab_menu',	
+		contentParentClass:'.tab_box',
+		contentClass:null,
+		callback:function(index){
+			console && console.log && console.log(arguments);
+
+		}
+	});
+
+
+
+});	
+</script>
+</body>
+</html>

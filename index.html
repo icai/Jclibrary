@@ -1,79 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+<head>
+<meta charset="utf-8">
+<title>Jc library</title>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Jclibrary : Just another jquery gallery " />
+<link rel="stylesheet" href="style/css/ui_frame.css">
+<style type="text/css">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+</style>
+</head>
 
-    <title>Jclibrary</title>
-  </head>
+<body>
+<div class="wrapper">
 
-  <body>
+	<div class="content_wraper " style="height:100%" >
+				<div id="iframe_content">
+					<!-- <div id="c_iframe" height="100%" ></div> -->
+					<iframe src="main.html" frameborder="0" id="c_iframe" name="c_iframe" height="100%" ></iframe>
+				</div>
+	</div>
+	<div class="side_bar">
+		<div class="side_content">
+			<nav class="global-nav">
+				<div class="title clearfix">
+					
+					<h1 class="logo"><a href="/plugin" title="JC library" ><img src="style/images/logo.png" alt="jclibrary"></a></h1>
+<!-- 					<div class="baseon">
+						<div class="sub">Based on <a href="http://jquery.com/" title="jquery" class="ico ico-jquery"></a>
+							<a href="https://github.com" title="github" class="ico ico-github"></a>
+						</div>
+					</div> -->
+				</div>
+<!-- 				<div class="module-section">
+					<h2 class="module-category">
+						Core
+					</h2>
+					<ol class="module-list clearfix">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/icai/Jclibrary">View on GitHub</a>
+					</ol>
+				</div> -->
+				<div class="module-section">
+					<h2 class="module-category">
+						User Interface(UI)
+					</h2>
+					<ol class="module-list clearfix">
+						<li><a href="ui/mask/demo.html?123" target="c_iframe" >mask</a></li>	
+						<li><a href="ui/tab/demo.html?123" target="c_iframe" >tab</a></li>
+						<li><a href="ui/slider/demo.html?0317" target="c_iframe" >slider</a></li>					
+						<li><a href="ui/tooltip/demo.html" target="c_iframe" >tooltip</a></li>
+						<li><a href="ui/dialog/demo.html?0306" target="c_iframe" >dialog</a></li>
+						<li><a href="ui/calendar/demo.html?0306" target="c_iframe" >calendar</a></li>
+						<li><a href="ui/placeholder/demo.html" target="c_iframe" >placeholder</a></li>
+						<li><a href="ui/countDown/demo.html" target="c_iframe" >countDown</a></li>
+						<li><a href="ui/wordCount/demo.html" target="c_iframe" >wordCount</a></li>
+						<li><a href="ui/scfixed/demo.html" target="c_iframe" >scrollFixed</a></li>
+						<li><a href="ui/router/docs.html" target="c_iframe" >router</a></li>
+						<li><a href="ui/validator/demo.html" target="c_iframe" >validator</a></li>
+						<li><a href="ui/validator/demo.html" target="c_iframe" >scrollbar</a></li>
+						<li><a href="https://github.com/gbirke/jquery_pagination" target="_blank" >jquery_pagination</a></li>
+					</ol>
+				</div>
+				<div class="module-section">
+					<h2 class="module-category">
+						Utility (Util)
+					</h2>
+					<ol class="module-list clearfix">
+						<li><a href="https://github.com/kriskowal/es5-shim/" target="_blank" >es5-shim</a></li>
+						<li><a href="https://code.google.com/p/swfobject/" target="_blank" >swfobject</a></li>
+						<li><a href="https://github.com/carhartl/jquery-cookie" target="_blank" >jQuery.cookie</a></li>
+						<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" >jQuery.easing</a></li>
+						<li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>						
+						<li><a href="util/doc/demo.html#tmpl" target="c_iframe" >tmpl(template)</a></li>
+						<li><a href="util/doc/demo.html#json" target="c_iframe" >JSON</a></li>
+						<li><a href="util/doc/demo.html#dateFormat" target="c_iframe" >dateFormat</a></li>
+						<li><a href="util/doc/demo.html#docfire" target="c_iframe" >docfire</a></li>
+					</ol>
+				</div>
+				<div class="module-section">
+					<h2 class="module-category">
+						Event
+					</h2>
+					<ol class="module-list clearfix">
+						<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank" >jquery-mousewheel</a></li>
+						<li><a href="https://github.com/tzuryby/jquery.hotkeys" target="_blank" >jquery.hotkeys</a></li>
+						<li><a href="https://github.com/mathiasbynens/jquery-placeholder" target="_blank" >jquery-placeholder</a></li>
+						<!-- <li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>						
+						<li><a href="util/doc/demo.html#tmpl" target="c_iframe" >tmpl(template)</a></li>
+						<li><a href="util/doc/demo.html#json" target="c_iframe" >JSON</a></li>
+						<li><a href="util/doc/demo.html#dateFormat" target="c_iframe" >dateFormat</a></li>
+						<li><a href="util/doc/demo.html#docfire" target="c_iframe" >docfire</a></li> -->
+					</ol>
+				</div>
+				<div class="module-section">
+					<h2 class="module-category">
+						Third-party MVC libraries
+					</h2>
+					<ol class="module-list clearfix">
+							<li><a href="http://underscorejs.org/" target="_blank" >underscorejs</a></li>
+							<li><a href="http://backbonejs.org/"target="_blank"  >backbonejs</a></li>
+							<li><a href="http://spinejs.com/"  target="_blank"  >spinejs</a></li>
+							<li><a href="http://javascriptmvc.com/"  target="_blank">javascriptmvc</a></li>
+					</ol>
+				</div>
+				<div class="module-section">
+					<h2 class="module-category">
+						Third-party like jQuery libraries(类jQuery库)
+					</h2>
+					<ol class="module-list clearfix">
+							<li><a href="http://zeptojs.com/"  target="_blank"  >zeptojs</a></li>
+							<li><a href="http://app-framework-software.intel.com/"  target="_blank"  >app-framework(jqmobi)</a></li>
+					</ol>
+				</div>
+				<div class="module-section">
+					<h2 class="module-category">
+						Dependency management libraries(
+				依赖管理)
+					</h2>
+					<ol class="module-list clearfix">
+							<li><a href="http://requirejs.org/" target="_blank" >requirejs</a></li>
+							<li><a href="http://seajs.org/docs/" target="_blank"  >seajs</a></li>
+							<li><a href="http://labjs.com/"target="_blank"  >labjs</a></li>
+					</ol>
+				</div>
+			</nav>
+		</div>
+		<div id="ser_slidebar"><div id="slide_btn" style=""></div></div>
+	</div>
+</div>
+<script src="asset/jquery.min.js"></script>
+<script src="style/scripts/frame_work_ui.js"></script>
+<script src="ui/router/jquery.router.js"></script>
+<script src="ui/tree/jquery.tree.js"></script>
 
-          <h1 id="project_title">Jclibrary</h1>
-          <h2 id="project_tagline">Just another jquery gallery </h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/icai/Jclibrary/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/icai/Jclibrary/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+<script>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+//document.getElementById('c_iframe').contentWindow.onload = function(){ alert('load!')}
+$('#c_iframe').router({
+	cache:false,
+	app:{
+		/**
+		 *  hash : url
+		 */
+		'#baidu':'http://www.baidu.com',
+		'#soso':'http://www.soso.com',
+		'#sina':'http://www.sina.com.cn',
+		/**
+		 *  id :url
+		 */
+		"#itour":'http://www.itour.cn'
+	},
+	onload:function(context,iframe){
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+		//$(this.parent.document).find('')
+		//console.log(this.document.body.scrollHeight);
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+	}
+});
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Jclibrary maintained by <a href="https://github.com/icai">icai</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+</script>
+</body>
 </html>

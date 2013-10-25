@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery dialog || itour.ui.dialog demo 说明</title>
+
+
+
+<!-- syntaxhighlighter -->
+<link href="../../asset/styles/shCore.css" rel="stylesheet" />
+<link href="../../asset/styles/shThemeDefault.css" rel="stylesheet" />
+
+
+
+
+
+<script src="../../asset/scripts/shCore.js"></script>
+<script src="../../asset/scripts/shBrushJScript.js"></script>
+<script src="../../asset/scripts/shBrushXml.js"></script>
+<!-- <script src="../../asset/scripts/shBrushCss.js"></script> -->
+
+<script type="text/javascript">
+  // syntaxhighlighter
+  SyntaxHighlighter.config.clipboardSwf = '../../asset/scripts/clipboard.swf';
+  SyntaxHighlighter.all();
+</script>
+<!-- syntaxhighlighter -->
+
+<script src="../../asset/jquery.js"></script>
+
+
+<script src="../../style/scripts/demo_ui.js"></script>
+<link rel="stylesheet" href="../../style/css/ui_demo.css">
+</head>
+
+<body>
+
+<div id="wrapper">  
+
+
+
+<div id="title">
+<h1> Util.json.js</h1>
+</div>
+  <h2 id="json"><span>JSON</span></h2>
+  <pre class="brush: js;">
+     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+    if (!window.JSON) {
+      window.JSON = {
+        parse: function (sJSON) { return eval("(" + sJSON + ")"); },
+        stringify: function (vContent) {
+          if (vContent instanceof Object) {
+            var sOutput = "";
+            if (vContent.constructor === Array) {
+              for (var nId = 0; nId < vContent.length; sOutput += this.stringify(vContent[nId]) + ",", nId++);
+              return "[" + sOutput.substr(0, sOutput.length - 1) + "]";
+            }
+            if (vContent.toString !== Object.prototype.toString) { return "\"" + vContent.toString().replace(/"/g, "\\$&") + "\""; }
+            for (var sProp in vContent) { sOutput += "\"" + sProp.replace(/"/g, "\\$&") + "\":" + this.stringify(vContent[sProp]) + ","; }
+            return "{" + sOutput.substr(0, sOutput.length - 1) + "}";
+          }
+          return typeof vContent === "string" ? "\"" + vContent.replace(/"/g, "\\$&") + "\"" : String(vContent);
+        }
+      };
+    }
+  </pre>
+</div>
+
+
+</body>
+</html>

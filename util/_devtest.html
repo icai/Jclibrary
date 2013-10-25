@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DEV TEST</title>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+<div id="title">
+<h1>DEV TEST</h1>
+</div>
+<script>
+
+
+
+String.prototype.repeat = function(n) {
+    var n = n || 1;
+    return Array(n + 1).join(this);
+};
+
+
+String.prototype.fillLength = function(l, ch, isRight){
+    var source;
+    if ((source = String(this)).length < l) {
+            var ar = new Array(l - source.length);
+            ar[isRight ? 'unshift' : 'push'](source);
+            source = ar.join(ch || '0');
+    }
+    return source;
+};
+
+Date.prototype.format = function(str) {
+    var fn = this;
+    var lang ='zh-CN',
+    	wk = {
+	    	'en':['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	    	"zh-CN":['日', '一', '二', '三', '四', '五', '六']
+		}, 
+		map={y:"getYear",Y:"getFullYear",M:"getMonth",d:"getDate",h:"getHours",m:"getMinutes",s:"getSeconds",D:"getDay"};
+
+    var val,p1f;
+    var _re =  /([yYMdhmsD]{1,4})/g;
+    return str.replace(_re,function(match,p1,offset,s){
+        p1f = p1.charAt(0);
+        if(!map[p1f]){
+        	return match;
+        }
+        val = fn[map[p1f]]();
+        p1f == 'y' && (val %= 100);
+        (p1f.toLowerCase() == 'y') && (p1.length == 4) && (val = fn[map['Y']]())
+        p1f == 'M' && val++;
+        p1f == 'D' && (val = wk[lang][val]);
+        return val < 10 && p1.length > 1 ? String(val).fillLength(2) : String(val);
+    })
+}
+
+
+
+
+var date = new Date();
+
+console.log(date.format('yyyy年M月d日 星期D'));
+
+//console.log((new Date).format('yyyy-M-dd'));
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+
+
+
+/** css Reset star like yahoo **/
+body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, p, th, td {
+	padding: 0;
+	margin: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+fieldset, img {
+	border: 0;
+}
+ul,li{list-style:none;}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-size: 100%;
+}
+
+
+img{
+	vertical-align:top;
+}
+
+
+
+* {
+	margin:0;
+	padding:0;
+}
+
+a{
+	text-decoration: none;
+}
+body {
+	background:#e3e3e3;
+	height:100%;
+	font:normal normal 12px/24px "Microsoft yahei", Arial;
+	padding-bottom:30px;
+}
+
+
+*html{
+    background-image:url(about:blank);
+    background-attachment:fixed;
+}
+
+
+
+
+.clearfix:before,.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.clearfix {
+    zoom: 1
+}
+
+
+.clear{
+	clear:both;
+}
+
+
+#title{width:960px;margin:3% auto 1%;}
+h1{font-size:18px;text-align: center;}
+
+h2{font-size:14px;padding-top:10px;padding-bottom: 10px;}
+
+h3{color:#333;font-size:14px;margin:30px 20px 0 0;}
+h6{ font-size:12px; font-weight:normal; color:#333;margin-bottom:10px; }
+h6 a { color:#09c; }
+
+pre {
+    padding: 0px 24px;
+    max-width: 800px;
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+    font-size: 13px;
+}
+aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+blockquote {
+/*    border-left:0.5em solid #eee;
+    border-left-style:solid;
+    border-left-color:#eee;
+    border-left- : */
+
+    padding: 0 2em;
+    margin-left:0;
+    max-width: 476px;
+}
+blockquote  cite {
+    font-size:14px;
+    line-height:20px;
+    color:#bfbfbf;
+}
+blockquote cite:before {
+    content: '\2014 \00A0';
+}
+
+blockquote p {  
+    color: #666;
+    max-width: 460px;
+}
+hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #999;
+}
+
+
+
+
+
+
+/** css Reset end **/
+
+
+
+p {
+
+    margin: 0 10px 10px;
+    *zoom: 1;
+    _display:inline;
+}
+
+
+
+
+#container {
+	width:960px;
+	margin:0 auto;
+	background:#f8f8f8;
+	border:1px solid #a3a3a3;
+	padding:20px 20px 50px;
+}
+
+
+
+
+div#header h1 {
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding-left: 10px;
+    background: #EEE;
+    color: #79B30B;
+}
+
+div#content p {
+    line-height: 1.4;
+}
+
+div#column_nav {
+    background: #B9CAFF;
+}
+
+div#extra {
+    background: #FF8539;
+}
+
+div#footer {
+    background: #333;
+    color: #FFF;
+}
+
+div#footer p {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+div#footer a {
+    display: inline;
+    padding: 0;
+    color: #C6D5FD;
+}
+
+div#wrapper {
+    float: left;
+    width: 100%;
+}
+
+div#content {
+    margin: 0 25%;
+}
+
+div#column_nav {
+    float: left;
+    width: 25%;
+    margin-left: -25%;
+    _display:inline;
+}
+
+
+div#extra {
+    float: left;
+    width: 25%;
+    margin-left: -100%;
+    _display:inline;
+}
+
+div#footer {
+    clear: left;
+    width: 100%;
+}
+/*  layout */
+
+
+
+
+.calendar{
+	background:#E4E9EE;
+	position: relative;
+
+}
+
+.calendar:after{
+	content: "calendar";
+	position: absolute;
+	bottom:0;
+	right:0;
+	padding: 3px 7px;
+	font-weight: bold;
+	font-size: 12px;
+	background-color: #f5f5f5;
+	border: 1px solid #ddd;
+	color: #9da0a4;
+	-webkit-border-radius: 4px 0 0px 0;
+	-moz-border-radius: 4px 0 0px 0;
+	border-radius: 4px 0 0px 0;
+}
+
+#demo1{
+	background: #DFECF5;
+}
+
+#demo1:after{
+	content: "demo1";
+}
+
+#demo2{
+	background: rgb(97, 119, 63);
+	height:500px;
+}
+
+
+#demo2:after{
+	content: "demo2";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

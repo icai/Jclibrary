@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="style/scripts/asset/jquery.js"></script>
+</head>
+<body>
+  
+<p><button type="button" id="test">Test</button></p>
+
+  <p><button id="test2" type="button">Test</button></p>
+
+
+<div id="log"></div>
+
+
+
+
+<script>
+var me = {
+  type: "zombie",
+  test: function(event) {
+    // Without proxy, `this` would refer to the event target
+    // use event.target to reference that element.
+    var element = event.target;
+    $(element).css("background-color", "red");
+
+    // With proxy, `this` refers to the me object encapsulating
+    // this function.
+    $("#log").append( "Hello " + this.type + "<br>" );
+    $("#test").unbind("click", this.test);
+  }
+};
+
+var you = {
+  type: "person",
+  test: function(event) {
+    $("#log").append( this.type + " ............." );
+  }
+};
+
+// execute you.test() in the context of the `you` object
+// no matter where it is called
+// i.e. the `this` keyword will refer to `you`
+var youClick = $.proxy( you.test, you );
+
+
+// attach click handlers to #test
+$("#test")
+  // this === "zombie"; handler unbound after first click
+  .click( $.proxy( me.test, me ) )
+  // this === "person"
+  .click( youClick )
+  // this === "zombie"
+  .click( $.proxy( you.test, me ) )
+  // this === "<button> element"
+  .click( you.test );
+</script>
+<script>
+  var obj = {
+    name: "John",
+    test: function() {
+      $("#log").append( this.name );
+      $("#test2").unbind("click", obj.test);
+    }
+  };
+
+  $("#test2").click( jQuery.proxy( obj, "test" )  ); // obj.test  
+</script>
+
+</body>
+</html>
+
