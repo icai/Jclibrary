@@ -20,11 +20,10 @@ $.calendar = function(options){
 var REG = /\d+/g,
 	RDATE = /^((19|2[01])\d{2})-(0?[1-9]|1[012])-(0?[1-9]|[12]\d|3[01])$/;
 
-var customEvent = (function(){
-	var re = {
-	    _triggerlists:{},
+var Events = {
 	    on:function(id,fn,lazyinit){
-	        var  set = (this._triggerlists[id] || (this._triggerlists[id] = []));
+	    	this._events || (this._events = {});
+	        var  set = (this._events[id] || (this._events[id] = []));
 	        var handler = {
 	            fn: fn
 	        };
@@ -32,11 +31,11 @@ var customEvent = (function(){
 	        return this;
 	    },
 	    off:function(id){
-	        if(this._triggerlists[id]) delete this._triggerlists[id];
+	        if(this._events[id]) delete this._events[id];
 	    },
 	    trigger:function(id,data){
 	        var fn = this;
-	        var handles = this._triggerlists[id];
+	        var handles = this._events[id];
 	        if(handles){
 		        for (var i = 0; i < handles.length; i++) {
 		        	if((handles[i].fn.apply(fn,data || (data = []))) === false){
@@ -45,9 +44,7 @@ var customEvent = (function(){
 		        };
 	        }
 	    }
-	}
-	return re;
-})();
+	};
 
 
 
@@ -56,7 +53,7 @@ $.calendar.prototype = {
 		var fn = this;
 		this.setting = options;
 		var op = this.setting;
-		jQuery.extend(true,this,{},customEvent); // extend;
+		jQuery.extend(this,Events); // extend;
 
 		this.TEMPLATE = $.extend(true,{},this.TEMPLATE,options.TEMPLATE);
 		// this.DATENAME = $.extend(this.DATENAME,options.DATENAME);
