@@ -274,7 +274,7 @@ var Utils = {
 				op.button = op.button || [];
 				op.button[op.button.length] = {
 					caption: "close",
-					name: this.closeVal || "\u5173\u95ED",
+					name: op.closeVal || "\u5173\u95ED",
 					callback: $.isFunction(op.close) ? op.close : function() {
 						me.destroy();
 					}
@@ -284,7 +284,7 @@ var Utils = {
 				op.button = op.button || [];
 				op.button[op.button.length] = {
 					caption: "ok",
-					name: this.okVal || "\u786E\u5B9A",
+					name: op.okVal || "\u786E\u5B9A",
 					callback: $.isFunction(op.ok) ? op.ok : function() {
 						me.destroy();
 						op.callback && op.callback();
@@ -295,7 +295,7 @@ var Utils = {
 				op.button = op.button || [];
 				op.button[op.button.length] = {
 					caption: "cancel",
-					name: this.cancelVal || "\u53D6\u6D88",
+					name: op.cancelVal || "\u53D6\u6D88",
 					callback: $.isFunction(op.cancel) ? op.cancel : function() {
 						me.destroy();
 						op.callback && op.callback();
