@@ -1,14 +1,14 @@
 @charset "utf-8";
 
 /*.month_box table{ float:left;}*/
-
-.Jc_calendar .panel_content { padding: 5px 18px 5px 18px;}
+.Jc_calendar { float: left;}
+.Jc_calendar .panel_content { padding: 5px 18px 5px 18px; float: left;}
 
 /*.Jc_calendar .panel_content:after{ content: "\0020"; display: block;visibility: hidden;height:0px;clear: both;}*/
 
 .Jc_calendar .panel_item {float:left;width:440px;margin-right:20px;margin-bottom: 45px;*position: relative;_display:inline;}
 #panel_calendar_1{}
-#panel_calendar_2{margin-right:10px;}
+#panel_calendar_2{margin-right: 0px;}
 
 .Jc_calendar .btn_box {position: relative; font-size: 14px;}
 .Jc_calendar .btn_box .prev_month,.Jc_calendar .btn_box .next_month,.Jc_calendar .btn_box .close_btn{ position: absolute; top: 230px; font-weight:bold; font-family: Verdana;cursor:pointer; background-color:transparent;}
@@ -17,7 +17,7 @@
 .Jc_calendar .btn_box .prev_month,.Jc_calendar .btn_box .next_month{ width: 25px;height: 58px;}
 
 .Jc_calendar .btn_box .prev_month{ left: -7px;_left: 20px;  background-image: url(page_btn.png); background-position:0px -58px ;}
-.Jc_calendar .btn_box .next_month{ right: 17px;_right: 20px; background-image:url(page_btn.png);background-position:-31px -58px;}
+.Jc_calendar .btn_box .next_month{ right: -7px;_right: 20px; background-image:url(page_btn.png);background-position:-31px -58px;}
 
 .Jc_calendar .btn_box .close_btn {top: 25px;right: 20px;}
 .Jc_calendar .btn_box .prev_month:hover{ }

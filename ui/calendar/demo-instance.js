@@ -430,7 +430,7 @@ jQuery(document).ready(function($) {
         PREVBTN: '<div class="field-botton pre-month" title="上一月" data-bind="prev" id="J_preMonth" datetype="MU"><i class="arrow"></i></div>',
         NEXTYEARBTN: '<div class="field-botton next-year" data-bind="nextyear" title="下一年" id="J_nextYear" datetype="YD"><i class="arrow"></i></div>',
         PREVYEARBTN: '<div class="field-botton pre-year" data-bind="prevyear" title="上一年" id="J_preYear" datetype="YU"><i class="arrow"></i></div>',
-        TODAYBTN: '<div class="field-botton cur-day" title="今天" id="J_curDay" datetype="CUR">Today</div>',
+        TODAYBTN: '<div class="field-botton cur-day" data-bind="today" title="今天" id="J_curDay" datetype="CUR">Today</div>',
         CLOSEBTN: ''
     }
 
@@ -441,7 +441,7 @@ jQuery(document).ready(function($) {
         classNames: {
             weekend: 'weekend'
         },
-        count: 1,
+        count:1,
         isHoliday: false,
         weekPrefix: '星期',
         sync: false,
@@ -496,6 +496,7 @@ jQuery(document).ready(function($) {
         date = date.split('-');
         var year = date[0],
             month = Number(date[1] )-1;
+
         var Today = new Date(),
             tY = parseInt(Today.getFullYear()),
             tM = parseInt(Today.getMonth()),

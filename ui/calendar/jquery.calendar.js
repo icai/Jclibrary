@@ -544,6 +544,10 @@ $.calendar.prototype = {
     prevYear:function(){
     	this.stepMonth(-12);
     },
+    curMonth: function(){
+    	this.curDate = this.stringify(new Date);
+    	this.stepMonth(0);
+    },
     docfire: function (hidelist, callback) { //
         var plist = typeof hidelist == "string" ? hidelist.split(0) : hidelist;
         function checkin(etg, list) {
@@ -574,7 +578,6 @@ $.calendar.prototype = {
     },
     _selectEvent:{
     	month:function(){
-
     	},
     	year:function(){
     	}
@@ -655,7 +658,7 @@ $.calendar.prototype = {
 		nextyear:function(e){
             if(this.trigger('ctrl',[{
                 target:e.currentTarget,
-                type:'next'
+                type:'nextyear'
             }]) === false){
             	return false;
             }
@@ -665,11 +668,21 @@ $.calendar.prototype = {
 		prevyear:function(e){
             if(this.trigger('ctrl',[{
                 target:e.currentTarget,
-                type:'next'
+                type:'prevyear'
             }]) === false){
             	return false;
             }
 			this.prevYear();
+			if(!this.setting.container) this.setPosition();
+		},
+		today: function(e){
+            if(this.trigger('ctrl',[{
+                target:e.currentTarget,
+                type:'today'
+            }]) === false){
+            	return false;
+            }
+			this.curMonth();
 			if(!this.setting.container) this.setPosition();
 		},
 		close:function(e){
