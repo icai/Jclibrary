@@ -12,11 +12,11 @@
 $.calendar = function(options){
 	var options = $.extend(true, {}, $.calendar.defaults, options);	
 	if(!(this instanceof $.calendar)){
-		return new $.calendar(options);
+		return new $.calendar( $.extend(true,{},options,{autoRender:$.type(options.autoRender) == 'boolean' ? options.autoRender: true }) );
 	}
 	this.initialize.apply(this,arguments);
-	if(options.sync)
-		this.trigger('__init__');
+	if(options.autoRender)
+		this.trigger('render');
 };
 var REG = /\d+/g,
 	RDATE = /^((19|2[01])\d{2})-(0?[1-9]|1[012])-(0?[1-9]|[12]\d|3[01])$/;
@@ -68,10 +68,10 @@ $.calendar.prototype = {
 		this.disabledEndDate = true;
 
 		this.weekico = '[data-bind="week"]';
-		this.on('__init__',$.proxy(this.__init__,this));
+		this.on('render',$.proxy(this._setup,this));
 		
 	},
-	__init__:function(){
+	_setup:function(){
 		var fn = this;
 		var op = this.setting;
 
@@ -95,12 +95,56 @@ $.calendar.prototype = {
 		if(this.trigger('init') !== false){// init input value
 			(op.triggerNode || op.endTriggerNode) && this.setInitialValue();
 		}
+		this.on('aftershow',function(evt){
+			if((op.triggerNode || op.endTriggerNode) && !op.container){
+				$(window).on('resize.'+this.guid,function(){
+					fn._winEvent.resize.call(fn)
+				}).trigger('resize.' +this.guid);
+
+				this.docfire(['#'+this.guid,op.triggerNode,op.endTriggerNode],function(v){
+					$(document).off(v);
+					fn._btnEvent.close.call(fn,{currentTarget:window});
+					fn._winEvent.unresize.call(fn,{currentTarget:window});
+				})
+			}
+		})
+
 	},
 	$: function(selector){
 		return this.getDom().find(selector);
 	},
 	getDom: function(){
 		return $('#'+this.guid);
+	},
+	fillLength:function(str,l, ch, isRight){
+	    var source;
+	    if ((source = String(str)).length < l) {
+	            var ar = new Array(l - source.length);
+	            ar[isRight ? 'unshift' : 'push'](source);
+	            source = ar.join(ch || '0');
+	    }
+	    return source;
+	},
+    mergeArray:function(arr,k){
+		var tarr = [];
+        for (var i = 0; i < arr.length/k; i++) {
+        	var str = '';
+        	for (var j = k * i; j < k * (i+ 1); j++) {
+        		if(arr[j] == undefined)break;
+        		str+= arr[j];
+        	};
+        	tarr.push(str);
+        };
+        return tarr;
+    },
+	repeat:function(str,n){
+		var n = n || 1;
+		return new Array(n+1).join(str);
+	},
+	compile: function(s, d) {
+		for (var p in d)
+		s = s.replace(new RegExp('{' + p + '}', 'ig'), d[p]);
+		return s;
 	},
 	setInitialValue:function(){
 	    var op = this.setting;
@@ -141,7 +185,7 @@ $.calendar.prototype = {
 	    }
 	},
 	TEMPLATE:{
-		WRAPPER:'<div class="Jc_calendar {guidClassName}" id="{guid}" >{TABLEBOX}{BTNBOX}</div>',
+		WRAPPER:'<div class="Jc_calendar {guidClassName}" >{TABLEBOX}{BTNBOX}</div>',
 		TABLEBOX:'<div class="panel_content" data-bind="refresh" >{table}</div>',
 		TABLE:'<div class="panel_item " id="panel_calendar_{count}"><table class="" data-item="calendar_{count}">{CAPTION}{HEAD}{BODY}</table></div>',
 			CAPTION:'<caption><div class="month_title">{year}年{month}月</div></caption>',
@@ -155,7 +199,11 @@ $.calendar.prototype = {
 		BTNBOX:'<div class="btn_box">{NEXTBTN}{PREVBTN}{CLOSEBTN}</div>',
 			NEXTBTN:'<a class="next_month disable" href="javascript:;" data-bind="next" title="下一月"><span></span></a>',
 			PREVBTN:'<a class="prev_month" href="javascript:;" title="上一月" data-bind="prev" ><span></span></a>',
-			CLOSEBTN:'<a class="close_btn" href="javascript:;" title="关闭" data-bind="close" >关闭</a>'
+			CLOSEBTN:'<a class="close_btn" href="javascript:;" title="关闭" data-bind="close" >关闭</a>',
+
+        SELECT:'<select data-bind="{event}" class="select {changeDate}">{selectoption}</select>',
+        SELECTOPTION:'<option value="{option}" {selected}>{option}</option>'
+
 	},
     DATENAME: {
         "today": "今天",
@@ -242,7 +290,6 @@ $.calendar.prototype = {
         }
         return oTmp;
     },
-
     getMonthDays:function(year, month) {
         var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
         if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
@@ -256,20 +303,9 @@ $.calendar.prototype = {
 		var wkday = date.getDay(); // frist Date 
 		return wkday >= firstDay ? (wkday - firstDay) : (7 - firstDay + wkday);
     },
-    subfixLen:function(date){
-    },
     isWeekend:function(date){
     	return date.getDay() == 0 || date.getDay() == 6;
     },
-	fillLength:function(str,l, ch, isRight){
-	    var source;
-	    if ((source = String(str)).length < l) {
-	            var ar = new Array(l - source.length);
-	            ar[isRight ? 'unshift' : 'push'](source);
-	            source = ar.join(ch || '0');
-	    }
-	    return source;
-	},
 	format:function(date,str) {
 		var _fn = this;
 		if(typeof date == 'string'){
@@ -290,27 +326,6 @@ $.calendar.prototype = {
 	        p1f == 'D' && (val = wk[val]);
 	        return val < 10 && p1.length > 1 ? _fn.fillLength(val,2) : String(val);
 	    })
-	},
-    mergeArray:function(arr,k){
-		var tarr = [];
-        for (var i = 0; i < arr.length/k; i++) {
-        	var str = '';
-        	for (var j = k * i; j < k * (i+ 1); j++) {
-        		if(arr[j] == undefined)break;
-        		str+= arr[j];
-        	};
-        	tarr.push(str);
-        };
-        return tarr;
-    },
-	repeat:function(str,n){
-		var n = n || 1;
-		return new Array(n+1).join(str);
-	},
-	compile: function(s, d) {
-		for (var p in d)
-		s = s.replace(new RegExp('{' + p + '}', 'ig'), d[p]);
-		return s;
 	},
 	week: function(v) {
         return this.setting.weekPrefix + this.setting.textNames.dayNames[this.parse(v).getDay()];
@@ -345,19 +360,15 @@ $.calendar.prototype = {
     between:function(v1, v2){
         return parseInt((this.parse(v1) - this.parse(v2)) / 24 / 60 / 60 / 1000);
     },
+
 	show:function(){
 		this.getDom().show();
-		this.refresh();
-		//this._winEvent.resize();
+		this.trigger('aftershow');
 	},
-	hide:function(){ // 重构
+	hide:function(){
 		this.getDom().hide();
-		//this._winEvent.unresize();
 	},
-	refresh:function(date){ // 重构
-		this.getDom().find('[data-bind="refresh"]').html(this.renderMulti(date,this.setting.count));
-	},
-	setPosition:function(){
+	setPositionOffset:function(){
 		var _activeNode;
 		if($(this.activeNode).length >1){
 			_activeNode  = $(this.activeNode).filter(':visible');
@@ -376,21 +387,39 @@ $.calendar.prototype = {
 		var op = this.setting;
 		(op.triggerNode || op.endTriggerNode) && this._setDefaultDate(); 
 		this.renderUI(date || this.minDate);
-		this.bindUI();
-		this.asynRender(date || this.minDate);
+		this.afterRender(date || this.minDate);
 	},
-	asynRender:function(date){ // 重构
+	afterRender:function(date){
 		var fn = this;
 		var op = this.setting;
-		fn.trigger('asynRender',[date,fn.setting.count]);
+		if(this._bindEvented){
+			this.show();
+		}else{
+			this.bindEvent();
+			this.show();
+			this._bindEvented = true;
+		}
+		fn.trigger('afterRender',[date,fn.setting.count]);
+	},
+	_resetFlagValue: function(){
+		this._selectrender = false;
 	},
 	renderUI:function(date){
 		var fn = this;
 		var op = this.setting;
+		this._resetFlagValue();
+
 		var reHtml = fn.renderHtml(date,op.count);
-		if(this.getDom().length) this.getDom().remove();
-		if(op.container) $(op.container).empty();
-		$(op.container || 'body').append(reHtml);
+		if(this.getDom().length)
+			 this.getDom().html(reHtml);
+		else{
+			var wrapper = $('<div />',{
+				id: this.guid,
+				role:'calendar'
+			}).append(reHtml);
+			if(op.container) $(op.container).empty();
+			$(op.container || 'body').append(wrapper);	
+		}
 		this.selectRange();
 	},
 	selectRange:function(){
@@ -434,10 +463,42 @@ $.calendar.prototype = {
 		reHtml = this.compile(TEMPLATE.WRAPPER,{
 			tablebox:tablebox,
 			btnbox:btnbox,
-			guid:this.guid,
 			guidClassName:this.guidClassName
 		});
 		return reHtml;
+	},
+	isElement: function(el,str){
+		return new RegExp('^\\s*(?:<('+ el +')[\\s\\S]*?(?=<(\\1)|<\\\/\\1>|$))(?!<\\\/\\1>)\\s*$','ig').test(str);
+	},
+	renderSelect: function(type,currentValue){
+		var fn = this, op = this.setting;
+		var TEMPLATE = this.TEMPLATE;
+		var ry = [];
+		if(type == 'year' ){
+			if(currentValue > op.rangeYear[1])
+				ry = [op.rangeYear[0],currentValue];
+			else if(currentValue < op.rangeYear[0])
+				ry = [currentValue,op.rangeYear[1]];
+			else
+				ry = op.rangeYear;
+		}
+		var range = type == 'year' ?  ry : [1,12];
+		var 
+			temp1 = this.compile(TEMPLATE.SELECT,{
+				'event':type,
+				changeDate: op.classNames.changeDate || '',
+				selectoption:(function(range){
+					var t1 = '';
+					for (var i = range[0]; i <= range[1]; i++) {
+						t1 += fn.compile(TEMPLATE.SELECTOPTION,{
+							option:i,
+							selected:i == currentValue ? 'selected="selected"' :''
+						})
+					};
+					return t1;
+				})(range)
+			})
+		return temp1;
 	},
 	renderOne:function(date,count){
 		date = this.parse(date);
@@ -448,12 +509,27 @@ $.calendar.prototype = {
 		var year = date.getFullYear(),month = date.getMonth()*1,daylen = this.getMonthDays(year,month);
 		var preEmpty = this.prefixLen(new Date(year,month,1));
 		var firstDay = op.firstDayOfWeek;
+			if(op.changeYear || op.changeMonth){
+				if(this._selectrender)
+					caption = this.compile(TEMPLATE.CAPTION,{ //
+						year:year,
+						month:!!op.textNames.monthNames ? op.textNames.monthNames[month]: month+1
+					});
+				else{
+					caption = this.compile(TEMPLATE.CAPTION,{ //
+						year:op.changeYear ? this.renderSelect('year',year) :year,
+						month:op.changeMonth ?  this.renderSelect('month', month+1): (!!op.textNames.monthNames ? op.textNames.monthNames[month]: month+1 )
+					});
+					this._selectrender = true;
+				}
+			}else{
+				caption = this.compile(TEMPLATE.CAPTION,{ //
+					year:year,
+					month:!!op.textNames.monthNames ? op.textNames.monthNames[month]: month+1
+				});
 
-			caption = this.compile(TEMPLATE.CAPTION,{
-				year:year,
-				month:!!op.textNames.monthNames ? op.textNames.monthNames[month]: month+1
-			});
-			head = this.compile(TEMPLATE.HEAD,{
+			}
+			head = this.compile(TEMPLATE.HEAD,{// calendar head
 				hrow:(function(week){
 					var t1 = '',t2 = '';
 					var isweekend = fn.isWeekend(new Date(year,month,i)); 
@@ -527,14 +603,25 @@ $.calendar.prototype = {
 		var fn = this;
 		this.curDate = this.stringify(this.siblingsMonth(this.parse(this.curDate),count));
 		this.renderUI(this.curDate);
-		this.bindUI();
-		this.asynRender(this.curDate);
+		this.afterRender(this.curDate);
 	},
-    nextMonth:function(){
+	changeYear: function(year){
+		var count = +year - this.parse(this.curDate).getFullYear();
+		this.curDate = this.stringify(this.siblingsMonth(this.parse(this.curDate), count * 12));
+		this.renderUI(this.curDate);
+		this.afterRender(this.curDate);
+	},
+	changeMonth: function(month){
+		var count = +month - 1 - this.parse(this.curDate).getMonth();
+		this.curDate = this.stringify(this.siblingsMonth(this.parse(this.curDate), count));
+		this.renderUI(this.curDate);
+		this.afterRender(this.curDate);
+	},
+    nextMonth: function(){
 		var op = this.setting;
     	this.stepMonth(op.stepMonth);
     },
-    prevMonth:function(){
+    prevMonth: function(){
 		var op = this.setting;
     	this.stepMonth(-(op.stepMonth));
     },
@@ -563,7 +650,7 @@ $.calendar.prototype = {
         }
         var time = (new Date).getTime();
         var hash = 'mouseup.' + time;
-        $(document).bind(hash, function (e) {
+        $(document).on(hash, function (e) {
             var ev = e;
             if (checkin(ev, plist)) {
                 if (typeof callback != undefined && $.isFunction(callback)) {
@@ -577,9 +664,26 @@ $.calendar.prototype = {
         })
     },
     _selectEvent:{
-    	month:function(){
+    	year:function(e){
+            if(this.trigger('ctrl',[{
+                target:e.currentTarget,
+                type:'changeyear'
+            }]) === false){
+            	return false;
+            }
+
+			this.changeYear(e.target.value);
+			if(!this.setting.container) this.setPositionOffset();
     	},
-    	year:function(){
+    	month:function(e){
+            if(this.trigger('ctrl',[{
+                target:e.currentTarget,
+                type:'changemonth'
+            }]) === false){
+            	return false;
+            }
+			this.changeMonth(e.target.value);
+			if(!this.setting.container) this.setPositionOffset();
     	}
     },
     _dateEvent:{ // 重构
@@ -637,22 +741,22 @@ $.calendar.prototype = {
 		next:function(e){
             if(this.trigger('ctrl',[{
                 target:e.currentTarget,
-                type:'next'
+                type:'nextmonth'
             }]) === false){
             	return false;
             }
 			this.nextMonth();
-			if(!this.setting.container) this.setPosition();
+			if(!this.setting.container) this.setPositionOffset();
 		},
 		prev:function(e){
             if(this.trigger('ctrl',[{
                 target:e.currentTarget,
-                type:'prev'
+                type:'prevmonth'
             }]) === false){
             	return false;
             }
 			this.prevMonth();
-			if(!this.setting.container) this.setPosition();
+			if(!this.setting.container) this.setPositionOffset();
 			
 		},
 		nextyear:function(e){
@@ -663,7 +767,7 @@ $.calendar.prototype = {
             	return false;
             }
 			this.nextYear();
-			if(!this.setting.container) this.setPosition();
+			if(!this.setting.container) this.setPositionOffset();
 		},
 		prevyear:function(e){
             if(this.trigger('ctrl',[{
@@ -673,7 +777,7 @@ $.calendar.prototype = {
             	return false;
             }
 			this.prevYear();
-			if(!this.setting.container) this.setPosition();
+			if(!this.setting.container) this.setPositionOffset();
 		},
 		today: function(e){
             if(this.trigger('ctrl',[{
@@ -683,7 +787,7 @@ $.calendar.prototype = {
             	return false;
             }
 			this.curMonth();
-			if(!this.setting.container) this.setPosition();
+			if(!this.setting.container) this.setPositionOffset();
 		},
 		close:function(e){
             if(this.trigger('ctrl',[{
@@ -697,13 +801,13 @@ $.calendar.prototype = {
 	},
     _winEvent:{
 	    resize:function(){
-	    	this.setPosition();
+	    	this.setPositionOffset();
 	    },
 	    unresize:function(){
-	    	$(window).off('resize.'+this.guid);
+	    	$(window).off('resize.'+ this.guid);
 	    }
     },
-	bindUI:function(){ // after show event
+	bindEvent: function(){ // after show event
 		var fn = this;
 		var op = this.setting;
 		for( var i in this._btnEvent){
@@ -712,20 +816,14 @@ $.calendar.prototype = {
 		for(var i in this._dateEvent){
 			this.getDom().on(i,'[data-bind="date"]',$.proxy(this._dateEvent[i],this))
 		}
-
-		if((op.triggerNode || op.endTriggerNode) && !op.container){
-			$(window).on('resize.'+this.guid,function(){
-				fn._winEvent.resize.call(fn)
-			}).trigger('resize.' +this.guid);
-
-			this.docfire(['#'+this.guid,op.triggerNode,op.endTriggerNode],function(v){
-				$(document).unbind(v);
-				fn._btnEvent.close.call(fn,{currentTarget:window});
-			})
+		if(op.changeYear || op.changeMonth){
+			if(this.isElement('select',this.TEMPLATE.SELECT)){
+				for( var i in this._selectEvent){
+					this.getDom().on('change','[data-bind="' + i + '"]',$.proxy(this._selectEvent[i],this));
+				}
+			}
 		}
 	},  
-	dieEvent:function(){	
-	},
 	initEvent:function(){ // init bind event 
         var fn = this;
         var op  = this.setting;
@@ -738,54 +836,29 @@ $.calendar.prototype = {
         }
 
         $.each([op.triggerNode,op.endTriggerNode],function(i,node){
-	        $(node)[fn.triggerNodeEvent](function(){
+	        $(node)[fn.triggerNodeEvent](function(e){
 	           	fn.activeNode = node;
 	            if(fn.trigger('show',[{
 	                target:node
 	            }]) === false){
 	            	return false;
 	            }
-
 	            switch(node){
 	            	case op.triggerNode:
-	            	fn.render(fn.triggerDate);
+	            		fn.render(fn.triggerDate);
 	            	break;
 	            	case op.endTriggerNode:
-	            	fn.render(fn.endTriggerDate);
+	            		fn.render(fn.endTriggerDate);
 	            	break;
 	            }
-				fn.setPosition();
-	        }).parent().children(this.weekico).click(
-		        $.proxy(
-		        	$(node).trigger
-		        	,$(node)
-		        	,fn.triggerNodeEvent)
-	        );
+	        })
+	        // .parent().children(this.weekico).click( // input calendar logo
+		       //  $.proxy(
+		       //  	$(node).trigger
+		       //  	,$(node)
+		       //  	,fn.triggerNodeEvent) // see jquery proxy
+	        // );
         })
-
-
-   //      $(op.triggerNode)[this.triggerNodeEvent](function(){
-   //         	fn.activeNode = op.triggerNode;
-   //          if(fn.trigger('show',[{
-   //              target:op.triggerNode
-   //          }]) === false){
-   //          	return false;
-   //          }
-			// fn.render();
-			// fn.setPosition();
-   //      }).parent().children(this.weekico).click($.proxy($(op.triggerNode).trigger,$(op.triggerNode),fn.triggerNodeEvent));
-        
-   //      $(op.endTriggerNode)[this.triggerNodeEvent](function(){
-   //          fn.activeNode = op.endTriggerNode;
-   //          if( fn.trigger('show',[{
-   //              target:op.endTriggerNode
-   //          }]) === false){
-   //          	return false;
-   //          }
-			// fn.render();
-			// fn.setPosition();
-   //      }).parent().children(this.weekico).click($.proxy($(op.endTriggerNode).trigger,$(op.endTriggerNode),fn.triggerNodeEvent));
-
 	}
 }
 
@@ -801,6 +874,7 @@ $.calendar.defaults = {
 	isHoliday:true,
 	firstDayOfWeek:0,
 	classNames:{
+		changeDate:'changeDate',
 		oldDate:'oldDate',
 		overDate:'overDate',
 		choosedDate:'choosed',
@@ -812,7 +886,10 @@ $.calendar.defaults = {
 		monthNames:'', // ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 		dayNames:['日', '一', '二', '三', '四', '五', '六'] //['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], // 
 	},
-	sync:true,
+	changeMonth: false,
+	changeYear: false,
+	rangeYear:[1900,new Date().getFullYear()],
+	//autoRender:true,
 	rangeLock:false  // 范围锁
 };
 

@@ -208,6 +208,7 @@ jQuery(document).ready(function($) {
             CLOSEBTN: ''
         },
         count: 2,
+        autoRender: false,
         weekPrefix: '星期',
         dayNames: ["\u65e5", "\u4e00", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d"],
         firstDayOfWeek: 0
@@ -231,7 +232,7 @@ jQuery(document).ready(function($) {
         // }  
     })
 
-    lowPriceCalendar.on('asynRender', function(date, count) {
+    lowPriceCalendar.on('afterRender', function(date, count) {
         var fn = this;
         var op = this.setting;
         date = date || this.stringify(new Date);
@@ -243,22 +244,22 @@ jQuery(document).ready(function($) {
         this.ajaxActive = setTimeout(function() {
             $.each(priceData["paiceList"], function(i, el) {
                 var item = $('#' + fn.guid).find('[data-date=' + el['qrydate'] + ']');
-                if (item.hasClass(op.classNames.oldDate) || item.hasClass(op.classNames.overDate)) {
-                    return true;
-                }
+                // if (item.hasClass(op.classNames.oldDate) || item.hasClass(op.classNames.overDate)) {
+                //     return true;
+                // }
                 item.find('[data-asyn="price"]').html('￥' + el.price);
                 if (el['speclass']) {
                     item.find('[data-asyn="lowprice"]').addClass('low');
                 }
             })
-        }, 10)
-    }).trigger('asynRender');
+        }, 50)
+    }).trigger('render');
 
 
 
     var ctripSkin = {
         TEMPLATE: {
-            WRAPPER: '<div class="calendar_wrap" id="{guid}" >{TABLEBOX}{BTNBOX}</div>',
+            WRAPPER: '<div class="calendar_wrap"  >{TABLEBOX}{BTNBOX}</div>',
             TABLEBOX: '<div class="">{table}</div>',
             TABLE: '<div class="calendar_month" data-item="calendar_{count}" id="ctrip_calendar_{count}" >{CAPTION}{HEAD}{BODY}</div>',
             CAPTION: '<div class="calendar_title">{year}年{month}月</div>',
@@ -288,7 +289,7 @@ jQuery(document).ready(function($) {
     }
 
     //  携程样式   
-    var ctripHotel = new $.calendar($.extend({
+    var ctripHotel = $.calendar($.extend({
         triggerNode: '#J_CheckIn',
         endTriggerNode: '#J_CheckOut'
     }, ctripSkin))
@@ -337,7 +338,7 @@ jQuery(document).ready(function($) {
     })
 
 
-    var ctripFlight = new $.calendar($.extend({
+    var ctripFlight = $.calendar($.extend({
         triggerNode: '#J_DepDate',
         endTriggerNode: '#J_RetDate'
     }, ctripSkin))
@@ -356,14 +357,26 @@ jQuery(document).ready(function($) {
     })
 
 
-    // calendarCtrip.on('asynRender',function(){
-    // })
+    var ctripFlight2 = $.calendar($.extend({
+        triggerNode: '#calendar-in-2',
+        endTriggerNode: '#calendar-out-2',
+        changeYear: true,
+        changeMonth: true
+    }, $.extend(true, {},ctripSkin, {
+        TEMPLATE:{
+            SELECT:'<select data-bind="{event}" class="select {changeDate}">{selectoption}</select>',
+            SELECTOPTION:'<option value="{option}" {selected}>{option}</option>'
+
+        }
+      })
+    ))
+
 
 
     var TongChengSkin = {
 
         TEMPLATE: {
-            WRAPPER: '<div class="mCalendar" id="{guid}" ><div class="date" style="height: 238px; width: 441px;" >{TABLEBOX}{BTNBOX}</div></div>',
+            WRAPPER: '<div class="mCalendar"  ><div class="date" style="height: 238px; width: 441px;" >{TABLEBOX}{BTNBOX}</div></div>',
             TABLEBOX: '<div class="cal_box">{table}</div>',
             TABLE: '<div class="panel_item clearfix" data-item="calendar_{count}" id="calendar_{count}" ><div class="contentTime" ><table cellspacing="0" cellpadding="0" border="0">{CAPTION}{HEAD}{BODY}</table> <i class="monthBg" style="font-size: 160px; line-height: 211px; height: 211px; width: 219px;">{month}</i></div></div>',
             CAPTION: '<caption><div class="monthTitle" style="width: 219px;"><h4 class="mCalTitleFir"><span class="date_title">{year}年{month}月</span></h4></div></caption>',
@@ -390,7 +403,7 @@ jQuery(document).ready(function($) {
         }
     }
 
-    var calendarInc17u = new $.calendar($.extend({
+    var calendarInc17u = $.calendar($.extend({
         triggerNode: '#calendar_in',
         endTriggerNode: '#calendar_out'
     }, TongChengSkin))
@@ -412,7 +425,7 @@ jQuery(document).ready(function($) {
 
 
     var lunarTmpl = {
-        WRAPPER: '<div class="wnl-wrap" id="{guid}">{TABLEBOX}</div>',
+        WRAPPER: '<div class="wnl-wrap" >{TABLEBOX}</div>',
         TABLEBOX: '{table}',
         TABLE: '<div class="">{CAPTION}<div class="bd">{HEAD}{BODY}</div></div>',
         CAPTION: '<div class="hd ks-clear"><div class="lunar-box sx5" style="text-align: center;" id="J_dateHeader" title="蛇年"><span id="sy">{year}</span> 年<span id="sm">{month}</span>月<span id="gz">农历癸巳年</span></div>{BTNBOX}</div>',
@@ -444,7 +457,7 @@ jQuery(document).ready(function($) {
         count:1,
         isHoliday: false,
         weekPrefix: '星期',
-        sync: false,
+        autoRender: false,
         dayNames: ["\u65e5", "\u4e00", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d"],
         firstDayOfWeek: 0
     });
@@ -490,7 +503,7 @@ jQuery(document).ready(function($) {
         return S;
     }
 
-    lunar.on('asynRender', function(date, count) {
+    lunar.on('afterRender', function(date, count) {
         var me = this;
         var op = this.setting;
         date = date.split('-');
@@ -515,7 +528,7 @@ jQuery(document).ready(function($) {
             }
         })
 
-    }).trigger('__init__');
+    }).trigger('render');
 
 
 
