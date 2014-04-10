@@ -75,17 +75,17 @@
 .lunar .sx10 {background-position:0 -1314px;}
 .lunar .sx11 {background-position:0 -1453px;}
 
-.lunar .pop-common {position:absolute;left:20px;top:-9999px;visibility:hidden;}
-.lunar .pop-common .content {position:relative;border:1px solid #ccc;background:#fff;box-shadow: 0 2px 4px rgba(0,0,0,.2);width:290px;}
-.lunar .pop-wnl .jieri-info {height:24px;line-height:24px;background:#fffaec;text-align:center;color:#e65b16;border-bottom:1px solid #DDD;}
-.lunar .pop-wnl .date-infos {margin:0 3px;padding:0;}
-.lunar .pop-wnl .day {float:left;width:55px;height:48px;line-height:48px;text-align:center;color:#1b7ca6;font-size:30px;font-weight:bold;}
-.lunar .pop-wnl .guolli {font-weight:bold;display:inline-block;padding-top:5px;}
-.lunar .pop-wnl .info {line-height:28px;padding:6px;}
-.lunar .pop-wnl .info dt {float:left;}
-.lunar .pop-wnl .info dd {margin-left:20px;clear:right;}
-.lunar .pop-arr-wrap .arr-top-bg {height:0;width:0;overflow:hidden;border-left:6px dashed transparent;border-right:6px dashed transparent;border-top:6px solid #ccc;border-bottom:6px dashed transparent;position:absolute;left:36px;bottom:-12px;}
-.lunar .pop-arr-wrap .arr-top {height:0;width:0;overflow:hidden;border-left:6px dashed transparent;border-right:6px dashed transparent;border-top:6px solid #fff;border-bottom:6px dashed transparent;position:absolute;left:36px;bottom:-11px;}
+.pop-common {position:absolute;left:20px;top:-9999px;visibility:hidden;}
+.pop-common .content {position:relative;border:1px solid #ccc;background:#fff;box-shadow: 0 2px 4px rgba(0,0,0,.2);width:290px;}
+.pop-wnl .jieri-info {height:24px;line-height:24px;background:#fffaec;text-align:center;color:#e65b16;border-bottom:1px solid #DDD;}
+.pop-wnl .date-infos {margin:0 3px;padding:0;}
+.pop-wnl .day {float:left;width:55px;height:48px;line-height:48px;text-align:center;color:#1b7ca6;font-size:30px;font-weight:bold;}
+.pop-wnl .guolli {font-weight:bold;display:inline-block;padding-top:5px;}
+.pop-wnl .info {line-height:28px;padding:6px;}
+.pop-wnl .info dt {float:left;}
+.pop-wnl .info dd {margin-left:20px;clear:right;}
+.pop-arr-wrap .arr-top-bg {height:0;width:0;overflow:hidden;border-left:6px dashed transparent;border-right:6px dashed transparent;border-top:6px solid #ccc;border-bottom:6px dashed transparent;position:absolute;left:36px;bottom:-12px;}
+.pop-arr-wrap .arr-top {height:0;width:0;overflow:hidden;border-left:6px dashed transparent;border-right:6px dashed transparent;border-top:6px solid #fff;border-bottom:6px dashed transparent;position:absolute;left:36px;bottom:-11px;}
 
 .lunar .notes-wrap{float:left;background-color:rgba(243,243,243,.85);border:1px solid #DDD;height:339px;padding:10px;margin-top:29px;width:182px;}
 .lunar .notes-wrap .title{font-size:16px;margin-bottom:10px;}

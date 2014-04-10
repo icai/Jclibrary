@@ -144,12 +144,33 @@
         <td class="code">Array</td>        
         <td>月份名称，可选值：“” || 数组 </td>                    
       </tr>       
+
       <tr>
-        <td height="57" class="code"><span class="new">!</span>outOfRangeLock</td>
+        <td height="57" class="code">changeYear</td>
+        <td class="code">false</td>
+        <td class="code">Boolean</td>        
+        <td>show select year</td>                    
+      </tr>
+
+      <tr>
+        <td height="57" class="code">changeMonth</td>
+        <td class="code">false</td>
+        <td class="code">Boolean</td>        
+        <td>show select year</td>                    
+      </tr>
+
+      <tr>
+        <td height="57" class="code">rangeYear</td>
+        <td class="code">[1900,new Date().getFullYear()]</td>
+        <td class="code">Array</td>        
+        <td>range of the changeYear</td>                    
+      </tr>
+      <tr>
+        <td height="57" class="code"><span class="new">!</span>rangeLock</td>
         <td class="code">false</td>
         <td class="code">Boolean</td>        
         <td>设定日历在超出范围的时候，月份是否可切换</td>                    
-      </tr>             
+      </tr>
       <tr>
         <td class="code">&nbsp;</td>
         <td class="code">&nbsp;</td>
@@ -168,6 +189,7 @@
 		<div id="calendar_demo_1" class="panel_box">
 		</div>
 	</div>
+  <hr />
 	<div class="calendar_demo clearfix">
       <div id="search">
           <form id="J_Search">
@@ -220,7 +242,9 @@
       </div>
 
 	</div>
+  <hr />
   <div class="lunar clearfix" style="display:block;">
+    <p>UI: Chrome Web Store - 万年历 http://t.cn/8sKByxj</p>
     <div id="content" class="ks-clear">
     </div>
   </div>

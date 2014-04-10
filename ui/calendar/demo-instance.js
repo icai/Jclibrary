@@ -371,6 +371,19 @@ jQuery(document).ready(function($) {
       })
     ))
 
+    ctripFlight2.on('click', function(e, dateStr) {
+        var op = this.setting;
+        var node = $(e.preNode);
+        this.setDateString(node, dateStr);
+        var endNode = $(this.setting.endTriggerNode);
+        if (e.preNode == this.setting.triggerNode) { //
+            this.startDate = dateStr;
+            if (this.between(this.endTriggerDate, dateStr) < 0) {
+                this.cacheTriggerDate(this.setting.endTriggerNode, this.siblings(dateStr, 1))
+                this.setDateString(endNode, this.siblings(dateStr, 1))
+            }
+        }
+    })
 
 
     var TongChengSkin = {
@@ -503,9 +516,76 @@ jQuery(document).ready(function($) {
         return S;
     }
 
+    /**
+     * 日期浮层
+     * time 2011-11-03
+     */
+    function popMsg(){
+        this._init();
+    }
+
+    popMsg.prototype = {
+        
+        _init : function(){
+            this.con = $('<div>');
+            $('body').append(this.con);
+            this.con.css({
+                'top':'0px',
+                'position':'absolute',
+                'visibility':'hidden'
+            });
+            this.con.addClass('pop-common pop-wnl');
+
+            this.render();
+        },
+
+        render : function(){
+            var pop = [];
+            pop.push('<div class="content">');
+            pop.push('<div class="pop-arr-wrap"><div class="arr-top-bg"></div><div class="arr-top"></div></div>');
+            pop.push('<div class="pop-content"></div>');
+            pop.push("</div>");
+            this.con.append(pop.join(""));       
+        },
+
+        renderDate : function(curLi,cld){
+            var curDate = curLi.attr("data-date");
+            if (curDate) {
+                var I = curDate.split("-");
+                var y = Number(I[1]);
+                var m = Number(I[2]);
+                var L = cld[m - 1];
+                var J = [];
+                J.push('<p class="jieri-info">' + ('<b style="color:#359b12; font-weight:normal;">' + L.solarFestival + "</b>" + L.lunarFestival + L.solarTerms) + "</p>");
+                J.push('<div class="date-infos ks-clear">');
+                J.push('<em class="day">' + m + "</em>");
+                J.push('<p class="guolli">' + L.sYear + "\u5e74" + L.sMonth + "\u6708" + L.sDay + "\u65e5&nbsp;&nbsp;\u661f\u671f" + L.week + "</p>");
+                J.push('<p class="nongli">\u519c\u5386' + nStr1[L.lMonth] + "\u6708" + cDay(cld[m - 1].lDay) + "&nbsp;&nbsp;" + L.cYear + "\u5e74 &nbsp;&nbsp;" + L.cMonth + "\u6708&nbsp;&nbsp;" + L.cDay + "\u65e5</p>");
+                J.push("</div>");
+                this.con.find('.pop-content').html(J.join(""));
+            }            
+        },
+
+        show : function(curLi,cld){
+            var G = curLi.offset(),self = this;
+            this.renderDate(curLi,cld);
+            this.con.offset({left: G.left - 10,top: G.top - 85});
+            this.con.css('visibility', 'visible');
+            this.con.find('.mask').css({'height':self.con.height() + 12,'width':self.con.width() + 12});
+        },
+
+        hide : function(){
+            this.con.css('visibility', 'hidden');          
+        }
+    }
+
+
     lunar.on('afterRender', function(date, count) {
         var me = this;
         var op = this.setting;
+
+        this.popmsg = new popMsg();
+
         date = date.split('-');
         var year = date[0],
             month = Number(date[1] )-1;
@@ -522,7 +602,19 @@ jQuery(document).ready(function($) {
         this.lunar = new calendar(year, month, tY, tM, tD);
         $.each(this.lunar, function(i, el) {
             var item = me.$('[data-date="' + me.stringify(new Date(el.sYear, el.sMonth -1, el.sDay)) + '"]');
-            item.find('.holidayholder').html(foramtDay(el));
+            item.find('.holidayholder').html(foramtDay(el)).attr("title", el.solarFestival ? el.solarFestival : el.solarTerms ? el.solarTerms : el.lunarFestival ? el.lunarFestival : "")
+            .end().hover(
+                function(e){
+                    $(this).addClass('mouseover');
+                    if($(this).attr('data-date')){
+                        me.popmsg.show($(this),me.lunar);
+                    }
+                },
+                function(e){
+                    $(this).removeClass('mouseover');
+                    me.popmsg.hide();
+                }
+            );
             if (el.isToday) {
                 item.addClass('today');
             }
