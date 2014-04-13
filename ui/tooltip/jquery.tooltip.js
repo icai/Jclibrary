@@ -56,13 +56,14 @@ var Browser = {
 			console.info(msg)
 		}catch(e){}
 	}
+	Tooltip = function(id, opts) {
+		var opts = $.extend(true, {}, Tooltip.defaults, opts);
+		return new Tooltip.fn.initialize(id, opts);
+	};
 
-	$.tooltip = function(id, optss) {
-		return new $.tooltip.fn.init(id, optss);
-	}
-	$.tooltip.fn = $.tooltip.prototype = {
-		constructor: $.tooltip,
-		init: function(o, opts) {
+	Tooltip.fn = Tooltip.prototype = {
+		constructor: Tooltip,
+		initialize: function(o, opts) {
 			this.options = opts;
 			this.target = null;
 			this._template =''; //  original templ
@@ -137,6 +138,9 @@ var Browser = {
 			return $('#'+ this.tooltipId);
 		},
 		getTarget: function(){
+			if(this.options.selector){
+				return $(this.target);
+			}
 			if(this._$target)
 				return  this._$target;
 			else{
@@ -208,7 +212,13 @@ var Browser = {
 			this.getDom().css({
 				zIndex: this.options.zIndex,
 				position: "absolute"
-			}).css(offset).addClass(params.position).addClass(params.arrowClass).append(Browser.isIE6 ? bgiframe : '');
+			}).css(offset).addClass(params.position);
+			var arrowObj = this.getDom().find('[data-tooltip="arrow"]');
+			if(arrowObj.length)
+				arrowObj.addClass(params.arrowClass);
+			else
+				this.getDom().addClass(params.arrowClass);
+			this.getDom().append(Browser.isIE6 ? bgiframe : '');
 		},
 		getPositionOffset:function(){
 			var fn = this;
@@ -230,11 +240,12 @@ var Browser = {
 			};
 
 			if(op.position == 'auto'){
-				_position = tipsPos[getsP.angle];
+				_position = tipsPos[getsP.angle]; // translate screen position to arrow position
 			}else{
 				_position = op.position;
 			}
-			if(op.position == 'auto' && op.center && /([a-z]+)[A-Z]([a-z]+)/.test(_position)){ //
+			// four  center  direction auto position
+			if(op.position == 'auto' && op.center && /([a-z]+)[A-Z]([a-z]+)/.test(_position)){ 
 				_position = RegExp.$1 + 'Center';
 			}
 			var tcs,pos,offset,actualSize,tarSize,arrow;
@@ -269,7 +280,7 @@ var Browser = {
 						left:pos.left + offset.left + tarSize.width - actualSize.width + op.offset[0] ,
 						top:pos.top + offset.top + tarSize.height + op.arrowSize
 					}
-					arrow = 'arrow_top_right'; // bottomLeft
+					arrow = 'arrow-top-right'; // bottomLeft
 
 				break;	
 				case 'bottomRight':	
@@ -277,7 +288,7 @@ var Browser = {
 						left:pos.left + offset.left - op.offset[0],
 						top:pos.top + offset.top + tarSize.height + op.arrowSize  
 					}
-					arrow = 'arrow_top_left'; // bottomRight
+					arrow = 'arrow-top-left'; // bottomRight
 				break;
 				case 'bottom':	
 				case 'bottomCenter':
@@ -285,7 +296,7 @@ var Browser = {
 						left:pos.left + offset.left - 1/2 * (actualSize.width - tarSize.width),
 						top:pos.top + offset.top + tarSize.height  + op.arrowSize
 					}
-					arrow = 'arrow_top_center'; // bottomRight
+					arrow = 'arrow-top-center'; // bottomRight
 				break;
 				// ----------------------------------------------
 				case 'topLeft':
@@ -293,14 +304,14 @@ var Browser = {
 						left:pos.left + offset.left + tarSize.width - actualSize.width + op.offset[0] ,
 						top:pos.top + offset.top - actualSize.height - op.arrowSize
 					}
-					arrow = 'arrow_bottom_right';// topLeft
+					arrow = 'arrow-bottom-right';// topLeft
 				break;	
 				case 'topRight':
 					tcs = {
 						left:pos.left + offset.left - op.offset[0],
 						top:pos.top + offset.top - actualSize.height - op.arrowSize
 					}
-					arrow = 'arrow_bottom_left'; // topRight
+					arrow = 'arrow-bottom-left'; // topRight
 
 				break;	
 				case 'top':
@@ -309,7 +320,7 @@ var Browser = {
 						left:pos.left + offset.left - 1/2 * (actualSize.width - tarSize.width),
 						top:pos.top + offset.top  - actualSize.height - op.arrowSize 
 					}
-					arrow = 'arrow_bottom_center';// topLeft
+					arrow = 'arrow-bottom-center';// topLeft
 				break;
 
 				// ----------------------------------------------
@@ -319,14 +330,14 @@ var Browser = {
 						left:pos.left + offset.left - actualSize.width - op.arrowSize,
 						top:pos.top + offset.top  + tarSize.height -  actualSize.height + op.offset[1] 
 					}
-					arrow = 'arrow_right_bottom'; // leftTop
+					arrow = 'arrow-right-bottom'; // leftTop
 				break;
 				case 'leftBottom':// 
 					tcs = {
 						left:pos.left + offset.left - actualSize.width - op.arrowSize,
 						top:pos.top + offset.top  - op.offset[1]
 					}
-					arrow = 'arrow_right_top'; // leftBottom
+					arrow = 'arrow-right-top'; // leftBottom
 				break;
 				case 'left':
 				case 'leftCenter':
@@ -334,7 +345,7 @@ var Browser = {
 						left:pos.left + offset.left - actualSize.width - op.arrowSize,
 						top:pos.top + offset.top  - 1/2 * (actualSize.height - tarSize.height) 
 					}
-					arrow = 'arrow_right_center'; // leftTop
+					arrow = 'arrow-right-center'; // leftTop
 				break;
 				// ----------------------------------------------
 				case 'rightTop':
@@ -342,14 +353,14 @@ var Browser = {
 						left:pos.left + offset.left + tarSize.width + op.arrowSize,
 						top:pos.top + offset.top  + tarSize.height  -  actualSize.height + op.offset[1]
 					}
-					arrow = 'arrow_left_bottom'; // rightTop
+					arrow = 'arrow-left-bottom'; // rightTop
 				break;
 				case 'rightBottom': 
 					tcs = { 
 						left:pos.left + offset.left + tarSize.width + op.arrowSize ,
 						top:pos.top + offset.top - op.offset[1]
 					}
-					arrow = 'arrow_left_top'; // rightBottom
+					arrow = 'arrow-left-top'; // rightBottom
 				break;
 
 				case 'right':
@@ -358,7 +369,7 @@ var Browser = {
 						left:pos.left + offset.left + tarSize.width + op.arrowSize,
 						top:pos.top + offset.top  - 1/2 * (actualSize.height - tarSize.height) 
 					}
-					arrow = 'arrow_left_center'; // rightTop
+					arrow = 'arrow-left-center'; // rightTop
 				break;
 				default:throwError(" argument 'position' error!");
 			};
@@ -405,24 +416,14 @@ var Browser = {
 			}
 		},
 		callback:function(){
-			this.options.callback.call(this);	
+			this.options.callback.call(this,this.getPositionOffset());	
 		}
 	}
 
-	$.tooltip.fn.init.prototype = $.tooltip.fn;
+	Tooltip.fn.initialize.prototype = Tooltip.fn;
 
-	$.fn.tooltip = function(optss) {
-		var opts = $.extend(true, {}, $.tooltip.defaults, optss);
-		if(!this.length) {
-			return this;
-		}
-		this.each(function() {
-			$.tooltip(this, opts);
-		});
-		return this;
-	};
-	// default optss
-	$.tooltip.defaults = {
+	// default opts
+	Tooltip.defaults = {
 		template: undefined,
 		content: undefined,
 		loading: undefined,
@@ -431,12 +432,28 @@ var Browser = {
 		visible:false, // when  the mouse leave the target , over the tips ,tips is visible ?
 		timeout: 0,
 		zIndex: 1990,
-		position:"auto",  // auto left top right bottom
-		appendTo:'body',
+		position:"auto",  // auto left top right bottom function(){};
+		appendTo:'body', // || 'after'
 		offset:[0,25], // [x,y]
 		arrowSize:6,
 		close: false, // close btn
 		center:false,
 		callback: function() {}
+	};
+
+
+	// import api
+	$.tooltip = function(dom,opts){
+		return new Tooltip(dom,opts)
+	};
+
+	$.fn.tooltip = function(opts) {
+		if(!this.length) {
+			return this;
+		}
+		this.each(function() {
+			new Tooltip(this, opts);
+		});
+		return this;
 	};
 })(jQuery, this);
