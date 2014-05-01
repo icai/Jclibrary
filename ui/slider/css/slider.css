@@ -1,9 +1,10 @@
 
 
 .warp > li{
-	float: left;
+	/*float: left;*/
 	margin-right: 25px;
 	list-style:none;
+	margin-bottom: 50px;
 	*display: inline;
 }
 

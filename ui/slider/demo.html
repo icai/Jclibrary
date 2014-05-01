@@ -2,10 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jQuery Slider || itour.ui.slider demo 说明</title>
+<title>jQuery Slider 1.5.1</title>
 
 <script src="../../asset/jquery.js"></script>
 <script type="text/javascript" src="../../asset/jquery.easing.1.3.js"></script>
+<script src="../../event/jquery.mousewheel.js"></script>
 <script src="../../style/scripts/demo_ui.js"></script>
 <!-- syntaxhighlighter -->
 <link href="../../asset/styles/shCore.css" rel="stylesheet" />
@@ -37,7 +38,7 @@
 <div id="wrapper">
 
 	<div id="title">
-	<h1>jQuery Slider  || itour.ui.slider demo 说明</h1>
+	<h1>jQuery Slider 1.5.1</h1>
 	</div>
 
 
@@ -60,6 +61,9 @@
 	<p>~2013/01/08 : ~</p>
 
 	<p>~2013/04/02 : reconstruct the code</p>
+
+	<p>~2014/05/01:support mouseWheel, optimize effect: none/fade implementation</p>
+
   </div>
 
 
@@ -356,8 +360,8 @@
 			</pre>		
 		</li>
 		<li>
-			<h3>7.多图,无页按钮，循环滚动（长度:9,visible: 3, 
-			scroll:2） :</h3>
+			<h3>7.多图,无页按钮，循环滚动,鼠标滚动（长度:9,visible: 3, 
+			scroll:2,mouseWheel:true） :</h3>
 			<div class="slider-outer demo7">
 				<div class="slider-container">
 					<div class="slide-show">
@@ -395,7 +399,8 @@
 					//current:'on', 
 					visible: 3, // 显示多少个
 					scroll:3, // 滚动个数
-					circular：true
+					circular：true,
+					mouseWheel:true
 				});
 			</pre>		
 
@@ -486,7 +491,7 @@
 	      </tr>
 	      <tr>
 	        <td class="code">fadeSpeed</td>
-	        <td class="code">350</td>
+	        <td class="code">500</td>
 	        <td class="code">Number</td>        
 	        <td>淡入淡出速度</td>                            
 	      </tr>      
@@ -525,6 +530,12 @@
 	        <td class="code">1</td>
 	        <td class="code">Number</td>        
 	        <td>初始化状态，默认第一个开始，静态样式应该同步，否则可能会出错</td>                    
+	      </tr>
+	      <tr>
+	        <td class="code">mouseWheel</td>
+	        <td class="code">false</td>
+	        <td class="code">Boolean</td>        
+	        <td>鼠标滚动事件</td>                    
 	      </tr>        
 	    </tbody>
 	 </table>
@@ -547,19 +558,17 @@
 			vertical:false, // horizontal 默认横向
 			visible: 1, // 显示多少个
 			scroll:1, //  切换个数（针对） haspagination ==  false && hasNextPrev == true
-			fadeSpeed: 350, // 淡入速度
+			fadeSpeed: 500, // 淡入速度
 			slideSpeed: 350,  // 切换速度
 			play: 0,  // 间隔时间
 			pause: 0, //暂停时间
 			hoverPause: false, // 划过是否停止
 
-			start: 1, // 由哪一个开始：待定参数
+			start: 1, // 由哪一个开始
+			mouseWheel:false,
 			before: function() {},
 			callback: function() {}
 
-			mouseWheel: false, // 鼠标滚动：：待定参数
-			preload: false, // ：：待定参数
-			preloadImage: '/img/loading.gif', // ：：待定参数	
 
 		};
 
@@ -587,23 +596,6 @@
 				 <a href="javascript:;" class="prev"></a>
 			</div>
 	</pre>
-
-
-
-	<h2>itour 命名空间支持：</h2>
-
-	<pre class="brush: js;">
-		
-		function __slider__(q,param){
-			return $(q).slider(param);
-		}
-
-
-	    exports.itour = exports.itour ? exports.itour : {};
-	    exports.itour.ui = exports.itour.ui ? exports.itour.ui : {};
-	    exports.itour.ui.slider = __slider__
-
-	</pre>
 </div>
 
 
@@ -621,7 +613,7 @@ $(function(){
 		btnNext: '.next', 
 		btnPrev: '.prev',
 		paginationClass: '.num', 
-		paginationEvent:"mouseover",
+		paginationEvent:"mouseenter",
 		current:'on', //
 		effect:'none', 
 		play: 1000,  
@@ -636,7 +628,7 @@ $(function(){
 		btnNext: '.next', 
 		btnPrev: '.prev',
 		paginationClass: '.num', 
-
+		slideSpeed:200,
 		current:'on', // 
 		play: 0,  
 		pause: 0,
@@ -649,6 +641,7 @@ $(function(){
 		btnNext: '.next', 
 		btnPrev: '.prev',
 		paginationClass: '.num', 
+		paginationEvent:"mouseenter",
 		current:'on', // 
 		effect:'fade'
 	});
@@ -685,6 +678,7 @@ $(function(){
 		btnNext: '.next', 
 		btnPrev: '.prev',
 		paginationClass: '.num', 
+		paginationEvent:"hover",
 		current:'on',
 		visible: 3, // 显示多少个
 		scroll:3, // 滚动个数
@@ -699,7 +693,8 @@ $(function(){
 		current:'on',
 		visible: 3, // 显示多少个
 		scroll:2, // 滚动个数
-		circular:true
+		circular:true,
+		mouseWheel:true
 	});
 });	
 </script>
