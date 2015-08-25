@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://jplugin.w3cub.com/sitemap.xml 

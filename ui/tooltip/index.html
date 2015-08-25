@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tooltip - JC library</title>
+  <meta name="author" content="Terry Cai">
+
+  
+  <meta name="description" content="参数设置 参数
+默认值
+类型
+描述 template
+undefined
+String
+tip 层 模版 ，可以是 String 常量，也可以是 script 标签的id(#abcd),className(不推荐)，其他选择器 content
+null
+String,Function 当值设定为 &hellip;">
+  <meta name="keywords" content="tooltip, jquery, plugin">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jplugin.w3cub.com/ui/tooltip/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/uiframe.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JC library" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-66711781-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+<div class="wrapper">
+	<div class="side-bar">
+	<div class="side-content">
+		<nav class="global-nav">
+			<div class="title">
+				<div class="logo"><a href="/" title="JC library" ><span>JC library</span></a></div>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					User Interface(UI)
+				</h2>
+				<ol class="module-list clearfix">
+				
+				    <li class=""><a href="/ui/calendar/" > Calendar</a></li>
+				
+				    <li class=""><a href="/ui/countdown/" > Countdown</a></li>
+				
+				    <li class=""><a href="/ui/dialog/" > Dialog</a></li>
+				
+				    <li class=""><a href="/ui/mask/" > Mask</a></li>
+				
+				    <li class=""><a href="/ui/slides/" > Slides</a></li>
+				
+				    <li class=""><a href="/ui/tabs/" > Tabs</a></li>
+				
+				    <li class=" active"><a href="/ui/tooltip/" > Tooltip</a></li>
+					
+				</ol>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					Utility (Util)
+				</h2>
+				<ol class="module-list clearfix">
+					<li><a href="https://code.google.com/p/swfobject/" target="_blank" >swfobject</a></li>
+					<li><a href="https://github.com/carhartl/jquery-cookie" target="_blank" >jQuery.cookie</a></li>
+					<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" >jQuery.easing</a></li>
+					<li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>
+					<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank" >jquery-mousewheel</a></li>
+					<li><a href="https://github.com/tzuryby/jquery.hotkeys" target="_blank" >jquery.hotkeys</a></li>
+					<li><a href="https://github.com/mathiasbynens/jquery-placeholder" target="_blank" >jquery-placeholder</a></li>
+				</ol>
+			</div>
+		</nav>
+	</div>
+</div>
+	<div class="content-wraper " style="height:100%" >
+		    <div id="content">
+				<div class="docs-main">
+					<article role="article">
+						<header>
+							<h1 class="entry-title">Tooltip</h1>
+						</header>
+					 	<div class="article-body markdown-body">
+					 		<div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+                  <span class="toctoggle">[<a id="toctogglelink" class="internal" href="#">hide</a>]</span>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">参数设置</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">默认参数</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">定位说明</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-4">
+                     <a href="#tocAnchor-1-4"><span class="tocnumber">4</span> <span class="toctext">参考实例</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-5">
+                     <a href="#tocAnchor-1-5"><span class="tocnumber">5</span> <span class="toctext">动态加载</span></a>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><p>
+   <link rel="stylesheet" href="/ui/tooltip/css/tooltip.css" />
+</p>
+
+<h2 id="tocAnchor-1-1">参数设置</h2>
+
+<table class="classtable" cellspacing="0">
+<thead>
+<tr>
+<th width="14%">参数</th>
+<th width="13%">默认值</th>
+<th width="14%">类型</th>
+<th width="59%">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="code">template</td>
+<td class="code">undefined</td>
+<td class="code">String</td>
+<td>tip 层 模版 ，可以是 String 常量，也可以是 script 标签的id(#abcd),className(不推荐)，其他选择器</td>
+</tr>
+<tr>
+<td class="code">content</td>
+<td class="code">null</td>
+<td class="code">String,Function</td>
+<td>
+当值设定为 String 时，则清空 [ data-tooltip="content" ] 内容区，并插入当前值，
+当值设定为 Function 时，实现动态插入，调用this.insertContent()
+<pre>        
+content:function(){
+        var cnt = ' 1234';
+        var fn = this;
+          setTimeout(function(){
+              fn.insertContent(cnt);
+          },2000)
+        }
+</pre>
+</td>
+</tr>
+<tr>
+<td class="code">loading</td>
+<td class="code">null</td>
+<td class="code">String,Boolean</td>
+<td>
+当值设定为true 时，实现动态加载，并在内容区设定 [ data-tooltip="content" ]，和参数 'content'相互关联。
+
+默认loading模版： <p class="defalut_tooltip_loading">loading....</p>
+当值设定为 String 时，则覆盖默认的loading模版
+</td>
+</tr>
+<tr>
+<td class="code">trigger</td>
+<td class="code">'hover'</td>
+<td class="code">String</td>
+<td>可选参数：‘click’</td>
+</tr>
+<tr>
+<td class="code">selector</td>
+<td class="code">false</td>
+<td class="code">Boolean</td>
+<td>selector 不等于false时，实现动态绑定：
+// 动态  
+$(elem).tooltip({   
+selecotr:'.XXXX'  
+})
+
+//方法原理：  
+$(elem).on(event,selector,function(){ // elem 静态元素  
+// selector 动态元素  
+})
+</td>
+</tr>
+<tr>
+<td class="code">visible</td>
+<td class="code">false</td>
+<td class="code">Boolean</td>
+<td>当值设定为 true 时，鼠标能在tip层上停留，和参数 'trigger'相互关联</td>
+</tr>
+<tr>
+<td class="code">timeout</td>
+<td class="code">0</td>
+<td class="code">Number</td>
+<td>不可用</td>
+</tr>
+<tr>
+<td class="code">zIndex</td>
+<td class="code">1990</td>
+<td class="code">Number</td>
+<td>设定tip层的z-index 值</td>
+</tr>
+<tr>
+<td class="code">position</td>
+<td class="code">'auto'</td>
+<td class="code">String</td>
+<td>和参数 'center'相互关联，参考[方向说明](#pic_1)图</td>
+</tr>
+<tr>
+<td class="code">center</td>
+<td class="code">false</td>
+<td class="code">Boolean</td>
+<td>和参数 'position'相互关联，参考[方向说明](#pic_1)图</td>
+</tr>
+<tr>
+<td class="code">appendTo</td>
+<td class="code">'body'</td>
+<td class="code">String</td>
+<td>可选参数：‘after’，设置tip dom 元素追加到 body 或者 目标元素之后</td>
+</tr>
+<tr>
+<td class="code">offset</td>
+<td class="code">30</td>
+<td class="code">Number</td>
+<td>tip偏移微调，校正箭头对准目标元素</td>
+</tr>
+<tr>
+<td class="code">arrowSize</td>
+<td class="code">6</td>
+<td class="code">Number</td>
+<td>箭头的宽度或者高度，当箭头绝对定位于在tip 层外面（代码），不适用于最外层包裹（padding）</td>
+</tr>
+<tr>
+<td class="code">close</td>
+<td class="code">false</td>
+<td class="code">Boolean</td>
+<td>关闭按钮，事件绑定[ data-tooltip="close" ]</td>
+</tr>
+<tr>
+<td class="code">callback</td>
+<td class="code">function(){}</td>
+<td class="code">Function</td>
+<td>回调函数</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2 id="tocAnchor-1-2">默认参数</h2>
+
+<pre class="brush: js;">       
+     // 默认参数
+    $.tooltip.defaults = {
+      template: undefined,
+      content: null,
+      loading:null,
+      trigger:'hover', // hover click
+      selector:false,
+      visible:false, // when  the mouse leave the target , over the tips ,tips is visible ?
+      timeout: 0,
+      zIndex: 1990,
+      position:"auto",  // auto left top right bottom
+      appendTo:'body',
+      offset:30,
+      arrowSize:6,
+      close: false, // close btn
+      center:false,
+      callback: function() {}
+    };
+</pre>
+
+
+<h2 id="tocAnchor-1-3">定位说明</h2>
+
+<p>
+   <img src="images/trigger.png" alt="方向说明" />
+</p>
+
+<h2 id="tocAnchor-1-4">参考实例</h2>
+
+<table class="classtable" cellspacing="0">
+      <tr>
+        <td style="width:33.3%;">
+          <span class="dynamic_demo1">示例1</span>
+
+          <pre class="brush:js">
+
+
+            $('.dynamic_demo1').tooltip({
+              template:itourstyle,
+              offset:40,
+              visible:true
+            });
+            // 屏幕缩放 位置只适应
+          </pre>  
+
+        </td>
+        <td style="width:33.3%;">
+
+          <span class="dynamic_demo2">示例2</span>
+
+          <pre class="brush:js">
+            $('.dynamic_demo2').tooltip({
+              template: vancltempl,
+              offset:40,
+              visible:true,
+              position:'bottomRight'
+            });
+          </pre> 
+        </td>
+        <td style="width:33.4%;">
+          <span class="dynamic_demo3">示例3</span>
+          <pre class="brush:js">
+            $('.dynamic_demo3').tooltip({
+              template:Qzonestyle,
+              offset:40,
+              visible:true,
+              position:'rightBottom'
+            });
+          </pre> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dynamic_demo4">示例4</span>
+          <pre class="brush:js">
+            $('.dynamic_demo4').tooltip({
+              template:Qzonestyle,
+              offset:40,
+              visible:true,
+              position:'bottomLeft'
+            });
+          </pre> 
+        </td>
+        <td>
+          <span class="dynamic_demo5">示例5</span>
+          <pre class="brush:js">
+            $('.dynamic_demo5').tooltip({
+              template:douban,
+              offset:28,
+              visible:true,
+              position:'rightBottom'
+            });
+          </pre> 
+        </td>
+        <td>
+
+          <div class="hotel_pic">
+             
+             <img width="130" height="130" name="hotelpic" class="dynamic_demo6" alt="惠州龙门南昆山温泉大观园" src="http://images4.c-ctrip.com/target/hotel/68000/67286/B315F7A9-B1AB-4765-AD61-9FC2D48DCCB0_130_130.jpg" id="hotelpic" />
+          </div>
+          <span>示例6</span>
+          <pre class="brush:js">
+            $('.dynamic_demo6').tooltip({
+              template:hotelstyle,
+              offset:40,
+              visible:true,
+              position:'topLeft',
+              appendTo:'after'
+            });
+          </pre> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dynamic_demo7">示例7</span>
+          <pre class="brush:js">
+            $('.dynamic_demo7').tooltip({
+              template:vancltempl,
+              offset:30,
+              position:'leftTop'
+            });
+          </pre> 
+        </td>
+        <td>
+          <span class="dynamic_demo8">示例8</span>
+          <pre class="brush:js">
+            $('.dynamic_demo8').tooltip({
+              template:vancltempl,
+              offset:30,
+              position:'topRight'
+            });
+          </pre>
+        </td>
+        <td>
+          <span class="dynamic_demo9">示例9</span>
+          <pre class="brush:js">
+              $('.dynamic_demo9').tooltip({
+                template:vancltempl,
+                offset:30,
+                position:'rightTop'
+              });  
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="dynamic_demo10">示例10：异步加载</span>
+          <pre class="brush:js">
+           // 显示 loading 
+           // 并异步加载（ajax 请求）
+           // data-tooltip="content"  
+           // 属性为内容区 (必须)。
+
+          var douban2 = '<div class="detail-tip shadow-right" style="left: 835px; top: 399px;"><div class="" data-tooltip="content"></div><span class="arrow-left"></span></div>';
+
+            $('.dynamic_demo10').tooltip({
+              template:douban2,
+              offset:30,
+              loading:true,
+              visible:true,
+              position:'rightBottom',
+              content:function(){
+
+                var cnt = '&lt;h2&gt;荒潮<p class="color-gray">陈楸帆 / 2013-1 / 长江文艺出版社 / 24.80元 / 平装</p><p>如果并非只有人类拥有灵魂？如果并非只有生物才能进化？如果我们的未来必须穿过地狱之门？进步浪潮席卷之处，人的灵魂一片荒芜。故事发生在近未来的硅屿——一座被进步浪潮抛弃的垃圾之岛，对生态灾难习以为常的麻木岛民迎来了不可预知的变化：宣称要用环保技术造福硅屿的外来资本精英；在底层苦苦挣扎沉湎于电子毒品的垃圾少女；为拯救受未知病毒感染的爱子而不惜代...</p>';
+
+                var fn = this;
+                setTimeout(function(){
+
+
+                  fn.insertContent(cnt); 
+                  // 异步 否则直接 return
+                },2000)
+              }
+          </pre> 
+        </td>
+        <td>
+          <span class="dynamic_demo11">示例11</span>
+          <pre class="brush:js">
+            
+          </pre>
+        </td>
+        <td>
+          <span class="dynamic_demo12">示例12</span>
+          <pre class="brush:js">
+
+          </pre>
+        </td>
+      </tr>
+  </table>
+
+
+<h2 id="tocAnchor-1-5">动态加载</h2>
+
+<pre class="brush:js">      selector：false;// 默认值
+      $(elem).tooltip({ // 默认 非动态
+
+      })
+      $(elem).on(event,function(){ // elem 静态元素
+      })
+      // 动态
+      $(elem).tooltip({ 
+        selecotr:'.XXXX'
+      })
+      //方法原理：
+      $(elem).on(event,selector,function(){ // elem 静态元素
+      // selector 动态元素
+      })
+</pre>
+
+
+
+
+<script src=" /ui/tooltip/jquery.tooltip.js"></script>
+
+
+<script src=" /ui/tooltip/demo.js"></script>
+
+
+					 	</div>
+					</article>
+
+
+					
+						<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	<a class="addthis_button_twitter"></a>
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558841b45b591663"></script>
+</div>
+					
+
+					
+						<section id="comment">
+						    <h1 class="title">Comments</h1>
+						    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+						</section>
+						
+
+					
+				 </div>
+		    </div>
+	</div>
+</div>
+<!-- syntaxhighlighter -->
+<link href="/assets/syntaxhighlighter/styles/shCore.css" rel="stylesheet" />
+<link href="/assets/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" />
+<script src="/assets/syntaxhighlighter/scripts/shCore.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<!-- <script src="/assets/syntaxhighlighter/scripts/shBrushCss.js"></script> -->
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = '/assets/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+</script>
+<!-- syntaxhighlighter -->
+<script src=" /javascripts/jquery.cookie.js"></script>
+<script src=" /javascripts/jquery.tocLight.js"></script>
+<script type="text/javascript">
+    $(function() {
+      $.toc.clickHideButton({
+      	saveShowStatus: true
+      });
+    });
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'w3cub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jplugin.w3cub.com/ui/tooltip/';
+        var disqus_url = 'http://jplugin.w3cub.com/ui/tooltip/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Calendar - JC library</title>
+  <meta name="author" content="Terry Cai">
+
+  
+  <meta name="description" content="参数设置 参数 默认值 类型 描述 container '' String 日历生成容器，HTML DOM 选择器 triggerNode '' String 开始触发HTML DOM 选择器 endTriggerNode '' String 二次触发HTML DOM 选择器 count 2 &hellip;">
+  <meta name="keywords" content="calendar, jquery, plugin">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jplugin.w3cub.com/ui/calendar/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/uiframe.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JC library" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-66711781-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+<div class="wrapper">
+	<div class="side-bar">
+	<div class="side-content">
+		<nav class="global-nav">
+			<div class="title">
+				<div class="logo"><a href="/" title="JC library" ><span>JC library</span></a></div>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					User Interface(UI)
+				</h2>
+				<ol class="module-list clearfix">
+				
+				    <li class=" active"><a href="/ui/calendar/" > Calendar</a></li>
+				
+				    <li class=""><a href="/ui/countdown/" > Countdown</a></li>
+				
+				    <li class=""><a href="/ui/dialog/" > Dialog</a></li>
+				
+				    <li class=""><a href="/ui/mask/" > Mask</a></li>
+				
+				    <li class=""><a href="/ui/slides/" > Slides</a></li>
+				
+				    <li class=""><a href="/ui/tabs/" > Tabs</a></li>
+				
+				    <li class=""><a href="/ui/tooltip/" > Tooltip</a></li>
+					
+				</ol>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					Utility (Util)
+				</h2>
+				<ol class="module-list clearfix">
+					<li><a href="https://code.google.com/p/swfobject/" target="_blank" >swfobject</a></li>
+					<li><a href="https://github.com/carhartl/jquery-cookie" target="_blank" >jQuery.cookie</a></li>
+					<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" >jQuery.easing</a></li>
+					<li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>
+					<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank" >jquery-mousewheel</a></li>
+					<li><a href="https://github.com/tzuryby/jquery.hotkeys" target="_blank" >jquery.hotkeys</a></li>
+					<li><a href="https://github.com/mathiasbynens/jquery-placeholder" target="_blank" >jquery-placeholder</a></li>
+				</ol>
+			</div>
+		</nav>
+	</div>
+</div>
+	<div class="content-wraper " style="height:100%" >
+		    <div id="content">
+				<div class="docs-main">
+					<article role="article">
+						<header>
+							<h1 class="entry-title">Calendar</h1>
+						</header>
+					 	<div class="article-body markdown-body">
+					 		<div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+                  <span class="toctoggle">[<a id="toctogglelink" class="internal" href="#">hide</a>]</span>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">参数设置</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">参考示例</span></a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-3">
+                           <a href="#tocAnchor-1-2-1"><span class="tocnumber">2.1</span> <span class="toctext">低价日历</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#tocAnchor-1-2-2"><span class="tocnumber">2.2</span> <span class="toctext">旅行日历</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#tocAnchor-1-2-3"><span class="tocnumber">2.3</span> <span class="toctext">万年历</span></a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><p><link rel="stylesheet" href=" /ui/calendar/skin/default/demo.css" />
+<link rel="stylesheet" href=" /ui/calendar/skin/ctrip/ctrip.css" />
+<link rel="stylesheet" href=" /ui/calendar/skin/17u/mCal.css" />
+<link rel="stylesheet" href=" /ui/calendar/skin/lunar/lunar.css" /></p>
+
+<h2 id="tocAnchor-1-1">参数设置</h2>
+
+<table class="classtable" cellspacing="0">
+    <thead>
+        <tr>
+            <th width="14%">参数</th>
+            <th width="13%">默认值</th>
+            <th width="14%">类型</th>
+            <th width="59%">描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="code">container</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>日历生成容器，HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">triggerNode</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>开始触发HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">endTriggerNode</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>二次触发HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">count</td>
+            <td class="code">2</td>
+            <td class="code">Number</td>
+            <td>显示月份数 </td>
+        </tr>
+        <tr>
+            <td class="code">stepMonth</td>
+            <td class="code">1</td>
+            <td class="code">Number</td>
+            <td>上一月，下一月切换步进</td>
+        </tr>
+        <tr>
+            <td class="code">afterDays</td>
+            <td class="code">-1</td>
+            <td class="code">Number</td>
+            <td>
+                <p>酒店日历，-1为没有限制，其他依次类推</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">weekPrefix</td>
+            <td class="code">'星期'</td>
+            <td class="code">String</td>
+            <td>日历星期 前序，一般为周 或 星期</td>
+        </tr>
+        <tr>
+            <td class="code">isHoliday</td>
+            <td class="code">true</td>
+            <td class="code">String</td>
+            <td>设定节假日</td>
+        </tr>
+        <tr>
+            <td class="code">firstDayOfWeek</td>
+            <td class="code">0</td>
+            <td class="code">String</td>
+            <td>0表示星期天，以此类推</td>
+        </tr>
+        <tr>
+            <td class="code"> classNames:{}</td>
+            <td class="code"> </td>
+            <td class="code">Object</td>
+            <td>------------------日期相关className-----------------</td>
+        </tr>
+        <tr>
+            <td height="54" class="code">classNames.oldDate</td>
+            <td class="code">'oldDate'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>过期日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td class="code">classNames.overDate
+                <br />
+            </td>
+            <td class="code">'overDate'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>超出范围日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="46" class="code">classNames.weekend
+                <br />
+            </td>
+            <td class="code">'weekend'</td>
+            <td class="code">String</td>
+            <td>周末相关className</td>
+        </tr>
+        <tr>
+            <td height="47" class="code">classNames.hoverRangeDay
+                <br />
+            </td>
+            <td class="code">'hover'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>滑过选定日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="48" class="code">classNames.selectRangeDay</td>
+            <td class="code">'selected'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>选定日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="49" class="code">textNames:{}</td>
+            <td class="code"> </td>
+            <td class="code">Object</td>
+            <td>------------------日历相关字段文本---------------------</td>
+        </tr>
+        <tr>
+            <td height="50" class="code">textNames.monthNames</td>
+            <td class="code">''</td>
+            <td class="code">Array,String</td>
+            <td>月份名称，可选值：“” || 数组</td>
+        </tr>
+        <tr>
+            <td height="64" class="code">textNames.dayNames</td>
+            <td class="code">['日', '一', '二', '三', '四', '五', '六']</td>
+            <td class="code">Array</td>
+            <td>月份名称，可选值：“” || 数组 </td>
+        </tr>
+        <tr>
+            <td height="57" class="code">changeYear</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>show select year</td>
+        </tr>
+        <tr>
+            <td height="57" class="code">changeMonth</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>show select year</td>
+        </tr>
+        <tr>
+            <td height="57" class="code">rangeYear</td>
+            <td class="code">[1900,new Date().getFullYear()]</td>
+            <td class="code">Array</td>
+            <td>range of the changeYear</td>
+        </tr>
+        <tr>
+            <td height="57" class="code"><span class="new">!</span>rangeLock</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>设定日历在超出范围的时候，月份是否可切换</td>
+        </tr>
+        <tr>
+            <td class="code"> </td>
+            <td class="code"> </td>
+            <td class="code"> </td>
+            <td> </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2 id="tocAnchor-1-2">参考示例</h2>
+
+<h3 id="tocAnchor-1-2-1">低价日历</h3>
+
+<div class="calendar_demo clearfix">
+    <p>低价日历，示例数据: 2013/07</p>
+    <div id="calendar_demo_1" class="panel_box">
+    </div>
+</div>
+
+
+<h3 id="tocAnchor-1-2-2">旅行日历</h3>
+
+<div class="calendar_demo clearfix">
+    <div id="search">
+        <form id="J_Search">
+            <ul>
+                <li>
+                    <strong>酒店入住/离店日期选择</strong>
+                </li>
+                <li>
+                    <label class="tit" for="J_CheckIn">入住时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-29" data-bind="week"></span>
+                        <input id="J_CheckIn" type="text" class="J_S1 f-text trigger-node-29" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li>
+                    <label class="tit" for="J_CheckOut">离店时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-29" data-bind="week"></span>
+                        <input id="J_CheckOut" type="text" class="J_S2 f-text trigger-node-29" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li>
+                    <strong>机票出发/返程日期选择</strong>
+                </li>
+                <li>
+                    <label class="tit" for="J_DepDate">出发时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-55" data-bind="week"></span>
+                        <input id="J_DepDate" type="text" class="J_S1 f-text trigger-node-55" value="" autocomplete="off" />
+                    </div>
+                </li>
+                <li>
+                    <label class="tit" for="J_RetDate">返程时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-55" data-bind="week"></span>
+                        <input id="J_RetDate" type="text" class="J_S2 f-text trigger-node-55" value="" autocomplete="off" />
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div>
+        <div class="inline_box">
+            <input type="text" id="calendar_in" />
+        </div>
+        <div class="inline_box">
+            <input type="text" id="calendar_out" />
+        </div>
+    </div>
+    <div>
+        <div class="inline_box">
+            <input type="text" id="calendar-in-2" />
+        </div>
+        <div class="inline_box">
+            <input type="text" id="calendar-out-2" />
+        </div>
+    </div>
+</div>
+
+
+<h3 id="tocAnchor-1-2-3">万年历</h3>
+
+<div class="lunar clearfix" style="display:block;">
+    <p>UI: Chrome Web Store - 万年历 http://t.cn/8sKByxj</p>
+    <div id="content" class="ks-clear">
+    </div>
+</div>
+
+
+
+
+<script src=" /ui/calendar/jquery.calendar.js"></script>
+
+
+<script src=" /ui/calendar/lunar.js"></script>
+
+
+<script src=" /ui/calendar/demo-instance.js"></script>
+
+
+					 	</div>
+					</article>
+
+
+					
+						<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	<a class="addthis_button_twitter"></a>
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558841b45b591663"></script>
+</div>
+					
+
+					
+						<section id="comment">
+						    <h1 class="title">Comments</h1>
+						    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+						</section>
+						
+
+					
+				 </div>
+		    </div>
+	</div>
+</div>
+<!-- syntaxhighlighter -->
+<link href="/assets/syntaxhighlighter/styles/shCore.css" rel="stylesheet" />
+<link href="/assets/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" />
+<script src="/assets/syntaxhighlighter/scripts/shCore.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<!-- <script src="/assets/syntaxhighlighter/scripts/shBrushCss.js"></script> -->
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = '/assets/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+</script>
+<!-- syntaxhighlighter -->
+<script src=" /javascripts/jquery.cookie.js"></script>
+<script src=" /javascripts/jquery.tocLight.js"></script>
+<script type="text/javascript">
+    $(function() {
+      $.toc.clickHideButton({
+      	saveShowStatus: true
+      });
+    });
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'w3cub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jplugin.w3cub.com/ui/calendar/';
+        var disqus_url = 'http://jplugin.w3cub.com/ui/calendar/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>
+

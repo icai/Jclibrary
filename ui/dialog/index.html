@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dialog - JC library</title>
+  <meta name="author" content="Terry Cai">
+
+  
+  <meta name="description" content="参数设置 参数 默认值 类型 描述 type undefined String 对话框类型，如，['成功'，‘失败’,‘异常’]，不同类型模版之间差异于图标，模版绑定类型， 如： title '' String 对话框标题， 模版绑定对话框标题：.. content '' String &hellip;">
+  <meta name="keywords" content="dialog, jquery, plugin">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jplugin.w3cub.com/ui/dialog/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/uiframe.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="JC library" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-66711781-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+<div class="wrapper">
+	<div class="side-bar">
+	<div class="side-content">
+		<nav class="global-nav">
+			<div class="title">
+				<div class="logo"><a href="/" title="JC library" ><span>JC library</span></a></div>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					User Interface(UI)
+				</h2>
+				<ol class="module-list clearfix">
+				
+				    <li class=""><a href="/ui/calendar/" > Calendar</a></li>
+				
+				    <li class=""><a href="/ui/countdown/" > Countdown</a></li>
+				
+				    <li class=" active"><a href="/ui/dialog/" > Dialog</a></li>
+				
+				    <li class=""><a href="/ui/mask/" > Mask</a></li>
+				
+				    <li class=""><a href="/ui/slides/" > Slides</a></li>
+				
+				    <li class=""><a href="/ui/tabs/" > Tabs</a></li>
+				
+				    <li class=""><a href="/ui/tooltip/" > Tooltip</a></li>
+					
+				</ol>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					Utility (Util)
+				</h2>
+				<ol class="module-list clearfix">
+					<li><a href="https://code.google.com/p/swfobject/" target="_blank" >swfobject</a></li>
+					<li><a href="https://github.com/carhartl/jquery-cookie" target="_blank" >jQuery.cookie</a></li>
+					<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" >jQuery.easing</a></li>
+					<li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>
+					<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank" >jquery-mousewheel</a></li>
+					<li><a href="https://github.com/tzuryby/jquery.hotkeys" target="_blank" >jquery.hotkeys</a></li>
+					<li><a href="https://github.com/mathiasbynens/jquery-placeholder" target="_blank" >jquery-placeholder</a></li>
+				</ol>
+			</div>
+		</nav>
+	</div>
+</div>
+	<div class="content-wraper " style="height:100%" >
+		    <div id="content">
+				<div class="docs-main">
+					<article role="article">
+						<header>
+							<h1 class="entry-title">Dialog</h1>
+						</header>
+					 	<div class="article-body markdown-body">
+					 		<div id="toc-container">
+   <table class="toc" id="toc">
+      <tbody>
+         <tr>
+            <td>
+               <div id="toctitle">
+                  <h2>Contents</h2>
+                  <span class="toctoggle">[<a id="toctogglelink" class="internal" href="#">hide</a>]</span>
+               </div>
+               <ul>
+                  <li class="toc_level-1 toc_section-1">
+                     <a href="#tocAnchor-1-1"><span class="tocnumber">1</span> <span class="toctext">参数设置</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-2">
+                     <a href="#tocAnchor-1-2"><span class="tocnumber">2</span> <span class="toctext">样式约定</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-3">
+                     <a href="#tocAnchor-1-3"><span class="tocnumber">3</span> <span class="toctext">参考示例</span></a>
+                     <ul>
+                        <li class="toc_level-2 toc_section-4">
+                           <a href="#tocAnchor-1-3-1"><span class="tocnumber">3.1</span> <span class="toctext">腾讯对话框</span></a>
+                        </li>
+                        <li class="toc_level-2 toc_section-5">
+                           <a href="#tocAnchor-1-3-2"><span class="tocnumber">3.2</span> <span class="toctext">腾讯提示</span></a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="toc_level-1 toc_section-6">
+                     <a href="#tocAnchor-1-6"><span class="tocnumber">4</span> <span class="toctext">模版调用说明</span></a>
+                  </li>
+                  <li class="toc_level-1 toc_section-7">
+                     <a href="#tocAnchor-1-7"><span class="tocnumber">5</span> <span class="toctext">changelog</span></a>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div><p>
+   <link rel="stylesheet" href="/ui/dialog/css/dialog.css" />
+</p>
+
+<h2 id="tocAnchor-1-1">参数设置</h2>
+
+<table class="classtable" cellspacing="0">
+<thead>
+<tr>
+    <th width="14%">参数</th>
+    <th width="13%">默认值</th>
+    <th width="14%">类型</th>
+    <th width="59%">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td class="code">type</td>
+    <td class="code">undefined</td>
+    <td class="code">String</td>
+    <td>
+    对话框类型，如，['成功'，‘失败’,‘异常’]，不同类型模版之间差异于图标，模版绑定类型，
+    如： <span class="dialog_type_"></span>
+    </td>
+</tr>
+<tr>
+    <td class="code">title</td>
+    <td class="code">''</td>
+    <td class="code">String</td>
+    <td>
+    对话框标题，
+    模版绑定对话框标题：..<span class="title"></span>
+    </td>
+</tr>
+<tr>
+    <td class="code">content</td>
+    <td class="code">''</td>
+    <td class="code">String</td>
+    <td>
+    对话框内容，
+    模版绑定对话框内容：..<span class="title"></span>
+    </td>
+</tr>
+
+<tr>
+    <td class="code">timeout</td>
+    <td class="code">0</td>
+    <td class="code">Number</td>
+    <td>适用于['发表成功'，‘网络延时’，'加载中']等提示，但是注意加载中异步问题，参考[腾讯提示-异常提示]</td>
+</tr>
+<tr>
+    <td class="code">zIndex</td>
+    <td class="code">10001</td>
+    <td class="code">Number</td>
+    <td>对话框层高度，mask设置为 true， mask（阴影层自动 -1）</td>
+</tr>
+<tr>
+    <td class="code">mask</td>
+    <td class="code">false</td>
+    <td class="code">Boolean</td>
+    <td>
+    阴影层，依赖 $.mask,$.unmask
+    </td>
+</tr>
+<tr>
+    <td class="code">opacity</td>
+    <td class="code">0.5</td>
+    <td class="code">Number</td>
+    <td>阴影层透明度，[0,1]</td>
+</tr>
+<tr>
+    <td class="code">background</td>
+    <td class="code">"#000"</td>
+    <td class="code">String</td>
+    <td>阴影层颜色</td>
+</tr>
+<tr>
+    <td class="code">button</td>
+    <td class="code">[]</td>
+    <td class="code">Array</td>
+    <td>
+    <pre>           button:[{
+                        caption: "句柄字段",
+                        name:"这里是名字",
+                        callback: function() {
+                          // 按钮点击回调函数
+                        }
+                    },
+                    {
+                        caption: "句柄字段",
+                        name:"这里是名字",
+                        callback: function() {
+                          // 按钮点击回调函数
+                        }
+                    }       
+                ]
+            </pre>
+    </td>
+</tr>
+<tr>
+    <td class="code">close</td>
+    <td class="code">undefined</td>
+    <td class="code">Function</td>
+    <td>close按钮执行事件，相当于button 中的callback: function() {}</td>
+</tr>
+<tr>
+    <td class="code">ok</td>
+    <td class="code">undefined</td>
+    <td class="code">Function</td>
+    <td>ok按钮执行事，相当于button 中的callback: function() {}</td>
+</tr>
+<tr>
+    <td class="code">cancel</td>
+    <td class="code">undefined</td>
+    <td class="code">Function</td>
+    <td>cancel按钮执行事件，相当于button 中的callback: function() {}</td>
+</tr>
+<tr>
+    <td class="code">closeVal</td>
+    <td class="code">undefined</td>
+    <td class="code">String</td>
+    <td>close按钮的名称，相当于button 中的name:"这里是名字"</td>
+</tr>
+
+<tr>
+
+<td class="code">okVal</td>
+
+<td class="code">undefined</td>
+
+<td class="code">String</td>
+
+<td>ok按钮的名称，相当于button 中的name:"这里是名字"</td>
+
+</tr>
+
+<tr>
+
+<td class="code">cancelVal</td>
+
+<td class="code">undefined</td>
+
+<td class="code">String</td>
+
+<td>cancel按钮的名称，相当于button 中的name:"这里是名字"</td>
+
+</tr>
+
+<tr>
+
+<td class="code">beforeRender</td>
+
+<td class="code">function(){}</td>
+
+<td class="code">Function</td>
+
+<td>打开对话框 前调函数</td>
+
+</tr>
+
+<tr>
+
+<td class="code">afterClose</td>
+
+<td class="code">function(){}</td>
+
+<td class="code">Function</td>
+
+<td>关闭对话框 回调函数</td>
+
+</tr>
+
+<tr>
+
+<td class="code">afterRender</td>
+
+<td class="code">function(){}</td>
+
+<td class="code">Function</td>
+
+<td>对话框显示后回调函数，用于比较复杂的对话框，如：绑定事件</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+<h2 id="tocAnchor-1-2">样式约定</h2>
+
+<pre>
+   <code>data-dialog-btn 属性 用于绑定事件， close,ok,cancel 是常用按钮. 以 ' , ' 等 是 模板字符串.
+</code>
+</pre>
+
+<pre class="brush: html;">      
+        <button class="btn" title="" data-dialog-btn="close">×</button>
+        <button class="btn" data-dialog-btn="ok"></button>
+        <button class="btn" data-dialog-btn="cancel"></button>
+</pre>
+
+
+<h2 id="tocAnchor-1-3">参考示例</h2>
+
+<h3 id="tocAnchor-1-3-1">腾讯对话框</h3>
+
+<div class="dialog demo1">
+    <div class="autoset">
+        <label for="wr_title">自定义标题：</label>
+        <input type="text" name="wr_title" id="wr_title" value="删除说说提醒" />
+        <label for="wr_content">自定义内容：</label>
+        <input type="text" name="wr_content" id="wr_content" value="确定删除这条说说内容吗？" />
+        <label for="st_mask">设置遮罩层：</label>
+        <select name="st_mask" id="st_mask">
+                    <option value="0">关</option>
+                    <option value="1">开</option>
+        </select>
+    </div>
+    <button class="btn click">打开对话框</button>
+ </div>
+
+
+<p>
+   <strong>html模板</strong>
+</p>
+
+<pre>
+   <code class="html">    &lt;div class="qz_dialog_layer"  id=""&gt;
+        &lt;div id="dialog_main_1" class="qz_dialog_layer_main qz_dialog_btn_bpadding"&gt;
+            &lt;div class="qz_dialog_custom custom_left" id="dragdrop_1" style="cursor: move;"&gt;&lt;/div&gt;
+            &lt;div class="qz_dialog_custom custom_top" id="dragdrop_2" style="cursor: move;"&gt;&lt;/div&gt;
+            &lt;div id="dialog_head_1" class="qz_dialog_layer_title" style="cursor: move;"&gt;
+                &lt;h3 id="dialog_title_1"&gt;&lt;/h3&gt; 
+                &lt;!-- 这里绑定  标题 --&gt;
+                &lt;button id="dialog_button_1" title="关闭" data-dialog-btn="close"   class="qz_dialog_btn_close"&gt;
+                    &lt;span class="none"&gt;╳&lt;/span&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div id="dialog_content_1" class="qz_dialog_layer_cont" style="height:140px;"&gt;
+                &lt;div class="qz_dialog_layer_confirm_content" style="width:260px;"&gt; &lt;i class="qz_dialog_layer_icon qz_dialog_layer_icon_notice"&gt;&lt;/i&gt;
+                    &lt;h3&gt;&lt;/h3&gt;
+                    &lt;!-- 这里绑定 内容 --&gt;
+                    &lt;div class="qz_dialog_layer_confirm_content_p"&gt;&lt;/div&gt;
+                    &lt;div class="qz_dialog_layer_confirm_content_p"&gt; &lt;i class=""&gt;&lt;i&gt;&lt;/i&gt;&lt;/i&gt; 
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="qz_dialog_layer_ft"&gt;
+                &lt;div class="qz_dialog_layer_other"&gt;&lt;/div&gt;
+                &lt;div class="qz_dialog_layer_op"&gt;
+                    &lt;a href="javascript:;" title="点击这里确认" data-dialog-btn="ok" class="qz_dialog_layer_btn qz_dialog_layer_sub"&gt;
+                        &lt;span&gt;是&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;!-- data-dialog-btn="ok"  用于绑定事件--&gt;
+                    &lt;a href="javascript:;" title="点击这里否决" data-dialog-btn="cancel" class="qz_dialog_layer_btn qz_dialog_layer_nor"&gt;
+                        &lt;span&gt;否&lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;!-- data-dialog-btn="cancel"  用于绑定事件--&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code>
+</pre>
+
+<h3 id="tocAnchor-1-3-2">腾讯提示</h3>
+
+<div class="dialog demo2">
+    <button class="btn click tc1">成功提示</button>
+    <button class="btn click tc2">失败提示</button>
+    <button class="btn click tc3">异常提示</button>
+    <button class="btn click trigger_tc3">触发异常提示关闭</button>
+</div>
+
+
+<h2 id="tocAnchor-1-6">模版调用说明</h2>
+
+<pre class="brush: js;">
+        $.dialog('#dialog_temp2',{ // dialog_temp2 为 'script'模板
+            title:title,
+            content:content,
+            mask:mask,
+            close:function(){
+                this.destroy();
+            },
+            ok:function(){
+                this.destroy();
+            },
+            cancel:function(){ 
+                this.destroy();
+            }
+        })
+         $('#dialog_temp2').dialog({ // dialog_temp2 为 'script'模板
+            title:title,
+            content:content,
+            mask:mask,
+            close:function(){
+                this.destroy();
+            },
+            ok:function(){
+                this.destroy();
+            },
+            cancel:function(){ 
+                this.destroy();
+            }
+        });
+        var templss = '<p></p>{{xxx}}<div></div>{{xxx}}';
+        $.dialog(templss,{ // templss 为 模板字符串
+            title:title,
+            content:content,
+            mask:mask,
+            close:function(){
+                this.destroy();
+            },
+            ok:function(){
+                this.destroy();
+            },
+            cancel:function(){ 
+                this.destroy();
+            }
+        })
+</pre>
+
+
+<h2 id="tocAnchor-1-7">changelog</h2>
+
+<ol>
+<li>~2013/02/20 : add options afterRender::function</li>
+<li>~2013/03/06 : add options type::function</li>
+<li>~2014/03/15 : add drag::function and reconstruct this.</li>
+<li>~2014/03/22 : add options position,direction</li>
+</ol>
+
+
+<script src=" /javascripts/jquery.easing.1.3.js"></script>
+
+
+<script src=" /javascripts/jquery.mousewheel.js"></script>
+
+
+<script src=" /ui/mask/jquery.mask.js"></script>
+
+
+<script src=" /ui/dialog/jquery.dialog.js"></script>
+
+
+
+
+<script type="text/template" id="dialog_temp1">
+<![CDATA[
+    <div class="dialog_test">
+        <h3>{{title}}</h3>
+        <div>{{content}}</div>
+        <button class="btn" data-dialog-btn="wo">{{wo}}</button>
+        <button class="btn" data-dialog-btn="ni">{{ni}}</button>
+        <button class="btn" data-dialog-btn="close" title="{{close}}">×</button>
+        <button class="btn" data-dialog-btn="ok">{{ok}}</button>
+        <button class="btn" data-dialog-btn="cancel">{{cancel}}</button>
+    </div>
+]]>
+</script>
+
+
+<script type="text/template" id="dialog_temp2">
+<![CDATA[
+    <div class="qz_dialog_layer"  id="" style="width:300px;">
+        <div id="dialog_main_1" class="qz_dialog_layer_main qz_dialog_btn_bpadding">
+            <div class="qz_dialog_custom custom_left" id="dragdrop_1" style="cursor: move;"></div>
+            <div class="qz_dialog_custom custom_top" id="dragdrop_2" style="cursor: move;"></div>
+            <div id="dialog_head_1" data-drag="handler" class="qz_dialog_layer_title" style="cursor: move;">
+                <h3 id="dialog_title_1">{{title}}</h3>
+                <button id="dialog_button_1" title="关闭" data-dialog-btn="close" data-param="{a:'a',b:'b'}" class="qz_dialog_btn_close">
+                    <span class="none">╳</span>
+                </button>
+            </div>
+            <div id="dialog_content_1" class="qz_dialog_layer_cont" style="height:140px;">
+                <div class="qz_dialog_layer_confirm_content" style="width:260px;">
+                    <i class="qz_dialog_layer_icon qz_dialog_layer_icon_notice"></i>
+                    <h3>{{content}}</h3>
+                    <div class="qz_dialog_layer_confirm_content_p"></div>
+                    <div class="qz_dialog_layer_confirm_content_p"> <i class=""><i></i></i> 
+                    </div>
+                </div>
+            </div>
+            <div class="qz_dialog_layer_ft">
+                <div class="qz_dialog_layer_other"></div>
+                <div class="qz_dialog_layer_op">
+                    <a href="javascript:;" title="点击这里确认" data-dialog-btn="ok" class="qz_dialog_layer_btn qz_dialog_layer_sub">
+                        <span>是</span>
+                    </a>
+                    <a href="javascript:;" title="点击这里否决" data-dialog-btn="cancel" class="qz_dialog_layer_btn qz_dialog_layer_nor">
+                        <span>否</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+]]>
+</script>
+
+
+<script type="text/template" id="dialog_tips1">
+<![CDATA[
+     <div class="gb_tip_layer">
+        <span class="gtl_ico_succ"></span><span>{{content}}</span><span class="gtl_end"></span>
+     </div>
+
+]]>
+</script>
+
+
+
+
+<script type="text/template" id="dialog_tips2">
+<![CDATA[
+ <div class="gb_tip_layer">
+    <span class="gtl_ico_fail"></span><span>{{content}}</span><span class="gtl_end"></span>
+ </div>
+]]>
+</script>
+
+
+<script type="text/template" id="dialog_tips3">
+<![CDATA[
+ <div  class="gb_tip_layer">
+    <span class="gtl_ico_hits"></span><span>{{content}}</span><span class="gtl_end"></span>
+ </div>
+]]>
+</script>
+
+
+<script type="text/template" id="right-buttom-tips">
+<![CDATA[
+<div style="z-index: 600; right: 0px; bottom: 0px; height: 28px; width: 210px; overflow: hidden; position: fixed;" id="PcPoPmarket">
+    <div style="z-index:600;position: absolute;right:0;width:50px;height:30px;overflow:hidden;background:transparent;">
+        <span title="关闭" style="background:url(http://www1.pcauto.com.cn/indexwindow/2012/images/buttons.png) no-repeat -28px 0;cursor:pointer;float:right;clear:none;width:13px;height:13px;margin:8px 10px 0 0;" data-dialog-btn="close" ></span>
+        <span title="展开" style="cursor: pointer; float: right; width: 13px; height: 13px; overflow: hidden; clear: none; display: block; margin: 8px 13px 0px 0px; background: url(http://www1.pcauto.com.cn/indexwindow/2012/images/buttons.png) 0px 0px no-repeat;" data-dialog-btn="unfold"  id="showvod"></span>
+        <span title="缩小" style="cursor: pointer; float: right; overflow: hidden; width: 13px; height: 13px; clear: none; margin: 8px 13px 0px 0px; display: none; background: url(http://www1.pcauto.com.cn/indexwindow/2012/images/buttons.png) -14px 0px no-repeat;" data-dialog-btn="fold" id="hidevod"></span>
+    </div>
+    <iframe scrolling="no" frameborder="0" allowtransparency="true" width="350" height="230" id="tmpAreaLmtDivIframe" src="http://www.pcauto.com.cn/qcbj/open/gz/index.html">-</iframe>
+    <iframe frameborder="no" border="0" src="about:blank" style="position:absolute; visibility:inherit; top:0px; left:0px; width:100%; height:100%; z-index:-1; filter='progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)';"></iframe>
+</div>
+]]>
+</script>
+
+
+
+
+<script src=" /ui/dialog/demo.js"></script>
+
+
+
+
+					 	</div>
+					</article>
+
+
+					
+						<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	<a class="addthis_button_twitter"></a>
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558841b45b591663"></script>
+</div>
+					
+
+					
+						<section id="comment">
+						    <h1 class="title">Comments</h1>
+						    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+						</section>
+						
+
+					
+				 </div>
+		    </div>
+	</div>
+</div>
+<!-- syntaxhighlighter -->
+<link href="/assets/syntaxhighlighter/styles/shCore.css" rel="stylesheet" />
+<link href="/assets/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" />
+<script src="/assets/syntaxhighlighter/scripts/shCore.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="/assets/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<!-- <script src="/assets/syntaxhighlighter/scripts/shBrushCss.js"></script> -->
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = '/assets/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+</script>
+<!-- syntaxhighlighter -->
+<script src=" /javascripts/jquery.cookie.js"></script>
+<script src=" /javascripts/jquery.tocLight.js"></script>
+<script type="text/javascript">
+    $(function() {
+      $.toc.clickHideButton({
+      	saveShowStatus: true
+      });
+    });
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'w3cub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jplugin.w3cub.com/ui/dialog/';
+        var disqus_url = 'http://jplugin.w3cub.com/ui/dialog/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+</html>
+

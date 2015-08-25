@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://jplugin.w3cub.com/blog/archives/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/calendar/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/countdown/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/dialog/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/mask/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/slides/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/tabs/</loc>
+  </url>
+  <url>
+    <loc>http://jplugin.w3cub.com/ui/tooltip/</loc>
+  </url>
+</urlset>
