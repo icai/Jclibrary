@@ -1,4 +1,4 @@
 Jclibrary
 =========
 
-Just another jquery gallery 
+Reuseable jQuery plguins
