@@ -1,4 +1,4 @@
 Jclibrary
 =========
 
-Reuseable jQuery plguins
+Reuseable jQuery plugins
