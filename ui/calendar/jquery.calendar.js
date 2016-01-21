@@ -49,7 +49,6 @@
     };
 
 
-
     $.calendar.prototype = {
         initialize: function(options) {
             var fn = this;
@@ -389,11 +388,14 @@
             } else {
                 _activeNode = $(this.activeNode);
             };
-            this.OFFSET = {
+            this.getDom().css({
                 position: 'absolute',
-                zIndex: this.setting.zIndex,
+                zIndex: this.setting.zIndex
+            })
+            this.OFFSET = {
                 top: _activeNode.offset().top + _activeNode.outerHeight(),
-                left: _activeNode.offset().left
+                left: (this.getDom().width() + _activeNode.offset().left > document.documentElement.clientWidth) ?
+                    _activeNode.offset().left + _activeNode.outerWidth() - this.getDom().width() : _activeNode.offset().left
             };
             this.getDom().css(this.OFFSET);
         },
@@ -883,13 +885,16 @@
                     })
                     // .parent().children(this.weekico).click( // input calendar logo
                     //  $.proxy(
-                    //  	$(node).trigger
-                    //  	,$(node)
-                    //  	,fn.triggerNodeEvent) // see jquery proxy
+                    //      $(node).trigger
+                    //      ,$(node)
+                    //      ,fn.triggerNodeEvent) // see jquery proxy
                     // );
             })
         }
     }
+
+
+    // jQuery.extend($.calendar.prototype, jQuery.eventEmitter);
 
     $.calendar.defaults = {
         container: '',
