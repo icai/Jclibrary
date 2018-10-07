@@ -1,0 +1,62 @@
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{% include head.html %}
+<body>
+<div class="wrapper">
+	{% include sidebar.html %}
+	<div class="content-wraper " style="height:100%" >
+		    <div id="content">
+				<div class="docs-main">
+					<article role="article">
+						<header>
+							<h1 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
+						</header>
+					 	<div class="article-body markdown-body">
+					 		{{ content | toc_generate | expand_urls: root_url }}
+					 	</div>
+					</article>
+
+
+					{% unless page.sharing == false %}
+						{% include post/sharing.html %}
+					{% endunless %}
+
+					{% if site.disqus_short_name and page.comments == true %}
+						<section id="comment">
+						    <h1 class="title">Comments</h1>
+						    <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
+						</section>
+					{% endif %}	
+
+					
+				 </div>
+		    </div>
+	</div>
+</div>
+<!-- syntaxhighlighter -->
+<link href="{{root_url}}/assets/syntaxhighlighter/styles/shCore.css" rel="stylesheet" />
+<link href="{{root_url}}/assets/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" />
+<script src="{{root_url}}/assets/syntaxhighlighter/scripts/shCore.js"></script>
+<script src="{{root_url}}/assets/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="{{root_url}}/assets/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<!-- <script src="{{root_url}}/assets/syntaxhighlighter/scripts/shBrushCss.js"></script> -->
+<script type="text/javascript">
+	// syntaxhighlighter
+	SyntaxHighlighter.config.clipboardSwf = '{{root_url}}/assets/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+
+</script>
+<!-- syntaxhighlighter -->
+<script src="{{root_url}} /javascripts/jquery.cookie.js"></script>
+<script src="{{root_url}} /javascripts/jquery.tocLight.js"></script>
+<script type="text/javascript">
+    $(function() {
+      $.toc.clickHideButton({
+      	saveShowStatus: true
+      });
+    });
+</script>
+{% include disqus.html %}
+
+</body>
+</html>
+

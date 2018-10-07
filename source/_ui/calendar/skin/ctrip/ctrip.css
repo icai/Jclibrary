@@ -1,0 +1,44 @@
+@charset "utf-8";
+.calendar_wrap { /*width: 363px;*/ background: #fff; padding: 5px 5px 0; border: solid 1px #999; overflow: hidden; font-size: 12px; font-family: tahoma,Arial,Helvetica,simsun,sans-serif; -moz-box-shadow: 0 3px 5px #ccc; -webkit-box-shadow: 0 3px 5px #ccc; box-shadow: 0 3px 5px #ccc; }
+.calendar_wrap a { color: #0053aa; text-decoration: none !important; }
+.calendar_wrap a:hover { text-decoration: underline }
+#ctrip_calendar_1 { width: 180px }
+#ctrip_calendar_2 { width: 182px }
+.calendar_month { float: left; padding-bottom: 5px; text-align: center; }
+.calendar_title { height: 23px; line-height: 23px; font-weight: bold; color: #fff; background-color: #004fb8; text-align: center; }
+.calendar_day { overflow: hidden; margin: 0; padding-top: 5px; }
+.calendar_day dd { margin: 0; padding: 0; }
+#ctrip_calendar_2 dl { border-left: 2px solid #aaa; padding-left: 5px; padding-bottom: 30px; margin-bottom: -30px; }
+.calendar_month dt { float: left; width: 25px; height: 22px; line-height: 20px; color: #666; background-color: #ececec; margin-bottom: 2px; }
+.calendar_month .weekend { font-weight: bold; color: #f90; }
+.calendar_day a { float: left; width: 24px; height: 24px; line-height: 24px; margin-bottom: 1px; padding-right: 1px; font-size: 11px; font-weight: bold; color: #005ead; background-color: #fff; cursor: pointer; }
+.calendar_day a:hover, .calendar_day .today, .calendar_day .day_hover,.calendar_day .day_selected, .calendar_day .activeDate a,.calendar_day .c_festival_select, .calendar_day .c_festival_select:hover { background: #e6f4ff url(un_calender_index.png) no-repeat }
+.calendar_day a:hover { background-color: #e6f4ff; background-position: -26px -53px; text-decoration: none; }
+.calendar_day .today { background-color: #fff5d1; background-position: 0 -82px; }
+
+.calendar_day .day_over a, .calendar_day .day_no a{ font-weight: normal; color: #dbdbdb; outline: none; cursor: default; }
+.calendar_day .day_over a:hover, .calendar_day .day_no a:hover { background: #fff }
+.calendar_day .day_selected a, .calendar_day .day_selected:hover a{ background-color: #7EBCEC; background-position: 0 -53px; color: #fff; }
+.calendar_day .day_hover a, .calendar_day .day_hover:hover a{ background-color: #629be0; background-position: 0 -53px; color: #fff; }
+.calendar_day .c_festival_select a, .calendar_day .c_festival_select:hover a{ background-color: #ffe6a6; background-image: url(un_calender_index.png); background-position: 0 -111px; }
+.calendar_day .activeDate a,.calendar_day .activeDate a:hover{ background-color: #7EBCEC; background-position: 0 -53px; color: #fff;  }
+
+
+.calendar_wrap .yuandan span, .calendar_wrap .chuxi span, .calendar_wrap .chunjie span, .calendar_wrap .yuanxiao span, .calendar_wrap .qingming span, .calendar_wrap .wuyi span, .calendar_wrap .duanwu span, .calendar_wrap .zhongqiu span, .calendar_wrap .guoqing span, .calendar_wrap .today span { width: 24px; height: 24px; background-image: url(un_festivals.png); background-repeat: no-repeat; text-indent: -9999em; overflow: hidden; display: block; }
+.calendar_wrap .yuandan span { background-position: 0 0 }
+.calendar_wrap .chuxi span { background-position: 0 -32px }
+.calendar_wrap .chunjie span { background-position: 0 -64px }
+.calendar_wrap .yuanxiao span { background-position: 0 -96px }
+.calendar_wrap .qingming span { background-position: 0 -128px }
+.calendar_wrap .wuyi span { background-position: 0 -160px }
+.calendar_wrap .duanwu span { background-position: 0 -192px }
+.calendar_wrap .zhongqiu span { background-position: 0 -224px }
+.calendar_wrap .guoqing span { background-position: 0 -256px }
+.calendar_wrap .today span { background-position: 0 -288px }
+.c_calender_date { display: inline-block; color: #666; text-align: right; position: absolute; z-index: 1; }
+.calendar_wrap .btn_box{ position: relative;}
+.calendar_wrap .month_prev,.calendar_wrap  .month_next { position: absolute; top:0px;width: 23px; height: 23px; color: #fff; background: #2d7ce7 url(un_calender_index.png) no-repeat; cursor: pointer; }
+.calendar_wrap .month_prev { left:0px; background-position: 0 0; }
+.calendar_wrap .month_next { right:0px; background-position: 100% 0; }
+.calendar_wrap .month_prev:hover { background-color: #62adf1; background-position: 0 -26px; }
+.calendar_wrap .month_next:hover { background-color: #62adf1; background-position: 100% -26px; }

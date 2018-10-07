@@ -1,0 +1,7 @@
+.tabdemo > li{float: left;margin-right: 25px;list-style:none;*display: inline;}
+.tabdemo .box{width:210px;margin:10px auto 0;background:#fff;border:1px solid #d3d3d3;}
+.tabdemo .tab_menu{list-style:none;width:210px;overflow:hidden;}
+.tabdemo .tab_menu li{width:70px;float:left;height:30px;line-height:30px;color:#fff;background:#ccc;text-align:center;cursor:pointer;}
+.tabdemo .tab_menu li.current{color:#333;background:#fff;}
+.tabdemo .tab_box{padding:20px;height:120px;}
+.tabdemo .tab_box .hide{display:none;}

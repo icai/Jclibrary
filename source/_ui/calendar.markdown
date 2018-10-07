@@ -1,0 +1,260 @@
+---
+layout: docs
+comments: true
+title: Calendar
+keywords: calendar, jquery, plugin
+---
+
+<link rel="stylesheet" href="{{root_url}} /ui/calendar/skin/default/demo.css">
+<link rel="stylesheet" href="{{root_url}} /ui/calendar/skin/ctrip/ctrip.css">
+<link rel="stylesheet" href="{{root_url}} /ui/calendar/skin/17u/mCal.css">
+<link rel="stylesheet" href="{{root_url}} /ui/calendar/skin/lunar/lunar.css">
+
+##参数设置##
+<table class="classtable" cellspacing="0">
+    <thead>
+        <tr>
+            <th width="14%">参数</th>
+            <th width="13%">默认值</th>
+            <th width="14%">类型</th>
+            <th width="59%">描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="code">container</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>日历生成容器，HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">triggerNode</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>开始触发HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">endTriggerNode</td>
+            <td class="code">''</td>
+            <td class="code">String</td>
+            <td>
+                <p>二次触发HTML DOM 选择器</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">count</td>
+            <td class="code">2</td>
+            <td class="code">Number</td>
+            <td>显示月份数 </td>
+        </tr>
+        <tr>
+            <td class="code">stepMonth</td>
+            <td class="code">1</td>
+            <td class="code">Number</td>
+            <td>上一月，下一月切换步进</td>
+        </tr>
+        <tr>
+            <td class="code">afterDays</td>
+            <td class="code">-1</td>
+            <td class="code">Number</td>
+            <td>
+                <p>酒店日历，-1为没有限制，其他依次类推</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="code">weekPrefix</td>
+            <td class="code">'星期'</td>
+            <td class="code">String</td>
+            <td>日历星期 前序，一般为周 或 星期</td>
+        </tr>
+        <tr>
+            <td class="code">isHoliday</td>
+            <td class="code">true</td>
+            <td class="code">String</td>
+            <td>设定节假日</td>
+        </tr>
+        <tr>
+            <td class="code">firstDayOfWeek</td>
+            <td class="code">0</td>
+            <td class="code">String</td>
+            <td>0表示星期天，以此类推</td>
+        </tr>
+        <tr>
+            <td class="code"> classNames:{}</td>
+            <td class="code">&nbsp;</td>
+            <td class="code">Object</td>
+            <td>------------------日期相关className-----------------</td>
+        </tr>
+        <tr>
+            <td height="54" class="code">classNames.oldDate</td>
+            <td class="code">'oldDate'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>过期日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td class="code">classNames.overDate
+                <br>
+            </td>
+            <td class="code">'overDate'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>超出范围日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="46" class="code">classNames.weekend
+                <br>
+            </td>
+            <td class="code">'weekend'</td>
+            <td class="code">String</td>
+            <td>周末相关className</td>
+        </tr>
+        <tr>
+            <td height="47" class="code">classNames.hoverRangeDay
+                <br>
+            </td>
+            <td class="code">'hover'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>滑过选定日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="48" class="code">classNames.selectRangeDay</td>
+            <td class="code">'selected'</td>
+            <td class="code">String,[Bloolean]</td>
+            <td>选定日期className，同时具有Boolean 判断</td>
+        </tr>
+        <tr>
+            <td height="49" class="code">textNames:{}</td>
+            <td class="code">&nbsp;</td>
+            <td class="code">Object</td>
+            <td>------------------日历相关字段文本---------------------</td>
+        </tr>
+        <tr>
+            <td height="50" class="code">textNames.monthNames</td>
+            <td class="code">''</td>
+            <td class="code">Array,String</td>
+            <td>月份名称，可选值：“” || 数组</td>
+        </tr>
+        <tr>
+            <td height="64" class="code">textNames.dayNames</td>
+            <td class="code">['日', '一', '二', '三', '四', '五', '六']</td>
+            <td class="code">Array</td>
+            <td>月份名称，可选值：“” || 数组 </td>
+        </tr>
+        <tr>
+            <td height="57" class="code">changeYear</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>show select year</td>
+        </tr>
+        <tr>
+            <td height="57" class="code">changeMonth</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>show select year</td>
+        </tr>
+        <tr>
+            <td height="57" class="code">rangeYear</td>
+            <td class="code">[1900,new Date().getFullYear()]</td>
+            <td class="code">Array</td>
+            <td>range of the changeYear</td>
+        </tr>
+        <tr>
+            <td height="57" class="code"><span class="new">!</span>rangeLock</td>
+            <td class="code">false</td>
+            <td class="code">Boolean</td>
+            <td>设定日历在超出范围的时候，月份是否可切换</td>
+        </tr>
+        <tr>
+            <td class="code">&nbsp;</td>
+            <td class="code">&nbsp;</td>
+            <td class="code">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+##参考示例##
+
+###低价日历###
+
+<div class="calendar_demo clearfix">
+    <p>低价日历，示例数据: 2013/07</p>
+    <div id="calendar_demo_1" class="panel_box">
+    </div>
+</div>
+
+###旅行日历###
+
+<div class="calendar_demo clearfix">
+    <div id="search">
+        <form id="J_Search">
+            <ul>
+                <li>
+                    <strong>酒店入住/离店日期选择</strong>
+                </li>
+                <li>
+                    <label class="tit" for="J_CheckIn">入住时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-29" data-bind="week"></span>
+                        <input id="J_CheckIn" type="text" class="J_S1 f-text trigger-node-29" value="" autocomplete="off">
+                    </div>
+                </li>
+                <li>
+                    <label class="tit" for="J_CheckOut">离店时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-29" data-bind="week"></span>
+                        <input id="J_CheckOut" type="text" class="J_S2 f-text trigger-node-29" value="" autocomplete="off">
+                    </div>
+                </li>
+                <li>
+                    <strong>机票出发/返程日期选择</strong>
+                </li>
+                <li>
+                    <label class="tit" for="J_DepDate">出发时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-start-icon trigger-icon-55" data-bind="week"></span>
+                        <input id="J_DepDate" type="text" class="J_S1 f-text trigger-node-55" value="" autocomplete="off">
+                    </div>
+                </li>
+                <li>
+                    <label class="tit" for="J_RetDate">返程时间：</label>
+                    <div class="calendar-input-wrap">
+                        <span class="calendar-end-icon trigger-icon-55" data-bind="week"></span>
+                        <input id="J_RetDate" type="text" class="J_S2 f-text trigger-node-55" value="" autocomplete="off">
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div>
+        <div class="inline_box">
+            <input type="text" id="calendar_in">
+        </div>
+        <div class="inline_box">
+            <input type="text" id="calendar_out">
+        </div>
+    </div>
+    <div>
+        <div class="inline_box">
+            <input type="text" id="calendar-in-2">
+        </div>
+        <div class="inline_box">
+            <input type="text" id="calendar-out-2">
+        </div>
+    </div>
+</div>
+
+###万年历###
+
+<div class="lunar clearfix" style="display:block;">
+    <p>UI: Chrome Web Store - 万年历 http://t.cn/8sKByxj</p>
+    <div id="content" class="ks-clear">
+    </div>
+</div>
+
+
+<script src="{{root_url}} /ui/calendar/jquery.calendar.js"></script>
+<script src="{{root_url}} /ui/calendar/lunar.js"></script>
+<script src="{{root_url}} /ui/calendar/demo-instance.js"></script>

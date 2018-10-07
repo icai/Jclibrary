@@ -1,0 +1,33 @@
+<div class="side-bar">
+	<div class="side-content">
+		<nav class="global-nav">
+			<div class="title">
+				<div class="logo"><a href="{{root_url}}/" title="JC library" ><span>JC library</span></a></div>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					User Interface(UI)
+				</h2>
+				<ol class="module-list clearfix">
+				{% for item in site.ui %}
+				    <li class="{%if page.url == item.url %} active{% endif %}"><a href="{{ item.url }}" > {{ item.title | titlecase}}</a></li>
+				{% endfor %}	
+				</ol>
+			</div>
+			<div class="module-section">
+				<h2 class="module-category">
+					Utility (Util)
+				</h2>
+				<ol class="module-list clearfix">
+					<li><a href="https://code.google.com/p/swfobject/" target="_blank" >swfobject</a></li>
+					<li><a href="https://github.com/carhartl/jquery-cookie" target="_blank" >jQuery.cookie</a></li>
+					<li><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" >jQuery.easing</a></li>
+					<li><a href="https://github.com/ded/klass" target="_blank" >Class(klass)</a></li>
+					<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank" >jquery-mousewheel</a></li>
+					<li><a href="https://github.com/tzuryby/jquery.hotkeys" target="_blank" >jquery.hotkeys</a></li>
+					<li><a href="https://github.com/mathiasbynens/jquery-placeholder" target="_blank" >jquery-placeholder</a></li>
+				</ol>
+			</div>
+		</nav>
+	</div>
+</div>
